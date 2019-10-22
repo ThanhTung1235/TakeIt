@@ -1,5 +1,7 @@
 package com.takeIt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +19,7 @@ public class Address {
     @OneToOne
     private District district;
     @OneToOne(mappedBy = "address")
+    @Transient
     private Product product;
 
     public Product getProduct() {

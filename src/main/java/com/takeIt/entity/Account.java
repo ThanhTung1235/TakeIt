@@ -1,12 +1,14 @@
 package com.takeIt.entity;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Set;
 
 @Entity
 public class Account {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(unique = true)
     private String username;
     private String password;
@@ -18,11 +20,16 @@ public class Account {
     private AccountInfo accountInfo;
     private int status;
 
-    public String getId() {
+    public Account() {
+        this.createdAt = Calendar.getInstance().getTimeInMillis();
+        this.updatedAt = Calendar.getInstance().getTimeInMillis();
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -47,4 +47,12 @@ public class District {
     public void setCity(City city) {
         this.city = city;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }

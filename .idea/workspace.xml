@@ -6,7 +6,23 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="" />
+    <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ProductController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/District.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/District.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/District.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/District.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Role.class" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +33,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -38,14 +55,16 @@
     </option>
   </component>
   <component name="ProjectId" id="1SUwhMVtIYL2rIuLNc4Hcx6wsu6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/takeIt/service/category" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -59,10 +78,15 @@
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateBuilderDialog.RecentsKey">
+      <recent name="com.takeIt.entity" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\java\com\takeIt\service\category" />
+      <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\java\com\takeIt\service\account" />
       <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\resources" />
     </key>
   </component>
@@ -108,11 +132,39 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1571631600569</updated>
-      <workItem from="1571631608423" duration="9120000" />
+      <workItem from="1571631608423" duration="11292000" />
+      <workItem from="1571709477141" duration="18081000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java</url>
+          <line>63</line>
+          <properties class="com.takeIt.entity.AccountInfo" method="setAccount">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

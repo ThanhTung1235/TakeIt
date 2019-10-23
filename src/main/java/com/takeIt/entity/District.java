@@ -14,7 +14,7 @@ public class District {
     @JoinColumn(name = "matp")
     private City city;
     @OneToOne(mappedBy = "district")
-    private Address address;
+    private Gift gift;
 
     public long getId() {
         return id;
@@ -48,11 +48,11 @@ public class District {
         this.city = city;
     }
 
-    public Address getAddress() {
-        return address;
+    public Gift getGift() {
+        return gift;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setGift(Gift gift) {
+        this.gift = gift;
     }
 }

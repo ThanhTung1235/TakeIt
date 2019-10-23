@@ -10,7 +10,7 @@ public class Transaction {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Account account;
     @OneToOne
-    private Product product;
+    private Gift gift;
     private int status;
     private int confirm_owner;
 
@@ -30,12 +30,12 @@ public class Transaction {
         this.account = account;
     }
 
-    public Product getProduct() {
-        return product;
+    public Gift getGift() {
+        return gift;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setGift(Gift gift) {
+        this.gift = gift;
     }
 
     public int getStatus() {

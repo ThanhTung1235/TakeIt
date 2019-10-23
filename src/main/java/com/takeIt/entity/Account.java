@@ -1,5 +1,6 @@
 package com.takeIt.entity;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;
@@ -14,11 +15,12 @@ public class Account {
     private String password;
     private long createdAt;
     private long updatedAt;
-    @OneToMany(mappedBy = "account", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private Set<Role> role;
-    @OneToOne(mappedBy = "account")
+    @OneToOne(mappedBy = "account",cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
     private AccountInfo accountInfo;
+    @OneToMany(mappedBy = "account" ,cascade = CascadeType.ALL)
+    private Set<Gift> gifts;
     private int status;
+    private int role;
 
     public Account() {
         this.createdAt = Calendar.getInstance().getTimeInMillis();
@@ -96,12 +98,35 @@ public class Account {
         }
     }
 
-    public Set<Role> getRole() {
+    public enum Roles {
+        MEMBER(0),
+        ADMIN(1);
+        int value;
+
+        Roles(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static Roles findByValue(int value) {
+            for (Roles roles : Roles.values()) {
+                if (roles.getValue() == value) {
+                    return roles;
+                }
+            }
+            return null;
+        }
+    }
+
+    public int getRole() {
         return role;
     }
 
-    public void setRole(Set<Role> role) {
-        this.role = role;
+    public void setRole(Roles role) {
+        this.role = role.getValue();
     }
 
     public AccountInfo getAccountInfo() {

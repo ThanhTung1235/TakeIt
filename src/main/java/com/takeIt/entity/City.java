@@ -11,15 +11,7 @@ public class City {
     private String name;
     private String type;
     @OneToOne(mappedBy = "city")
-    private Address address;
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    private Gift gift;
 
     public long getId() {
         return id;
@@ -43,5 +35,13 @@ public class City {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Gift getGift() {
+        return gift;
+    }
+
+    public void setGift(Gift gift) {
+        this.gift = gift;
     }
 }

@@ -7,51 +7,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/GiftRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/GiftService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/GiftController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/ProductDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/GiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/GiftController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Address.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/City.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/District.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/District.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Image.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/AddressRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/ProductRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/address/AddressService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/address/AddressServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/ProductService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/ProductServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/GiftServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ProductController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/ProductDTO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/DistrictRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/DistrictRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/GiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/GiftRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/AddressService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/GiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/GiftServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/GiftController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/GiftController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Address.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/AccountInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/AccountInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Category.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/City.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/District.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/District.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Image.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product$Age_range.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product$Gender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product$ProductBuilder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Product.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Role.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest$ExchangeRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest$ExchangeRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Age_range.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Age_range.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Gender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Gender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction$Status.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/repository/AddressRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/repository/ProductRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/repository/DistrictRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/repository/DistrictRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/repository/GiftRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/repository/GiftRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTPagination.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTPagination.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse$Error.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse$Error.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse$SimpleError.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse$SimpleError.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse$Success.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse$Success.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/rest/RESTResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/AddressService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/AddressService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/address/AddressService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/address/AddressServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/product/ProductService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/product/ProductServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/product/GiftService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/product/GiftServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/util/DateTimeUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/util/DateTimeUtil.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -166,7 +168,14 @@
       <updated>1571631600569</updated>
       <workItem from="1571631608423" duration="11292000" />
       <workItem from="1571709477141" duration="23667000" />
-      <workItem from="1571824049489" duration="12423000" />
+      <workItem from="1571824049489" duration="12721000" />
+      <workItem from="1571880726278" duration="11522000" />
+      <workItem from="1571968096646" duration="17286000" />
+      <workItem from="1572055873756" duration="677000" />
+      <workItem from="1572057234397" duration="3330000" />
+      <workItem from="1572107249113" duration="1079000" />
+      <workItem from="1572190176414" duration="2581000" />
+      <workItem from="1572227831489" duration="5152000" />
     </task>
     <servers />
   </component>

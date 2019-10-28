@@ -1,15 +1,17 @@
 package com.takeIt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
-    @OneToMany(mappedBy = "category", cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH}, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
     Set<Gift> gifts;
 
     public long getId() {
@@ -27,4 +29,14 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+
+    @JsonIgnore
+    public Set<Gift> getGifts() {
+        return gifts;
+    }
+
+    public void setGifts(Set<Gift> gifts) {
+        this.gifts = gifts;
+    }
 }
+

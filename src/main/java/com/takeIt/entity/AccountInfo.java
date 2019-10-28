@@ -12,7 +12,7 @@ public class AccountInfo {
     @Column(unique = true)
     private String email;
     private long dob;
-    @OneToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToOne(cascade = CascadeType.ALL)
     private Account account;
     private long createdAt;
     private long updatedAt;

@@ -7,6 +7,8 @@ import com.takeIt.repository.DistrictRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AddressService {
     @Autowired
@@ -20,5 +22,13 @@ public class AddressService {
 
     public District getDistrict(long id) {
         return districtRepository.findById(id).orElse(null);
+    }
+
+    public List<District> getDistrictByCityId(long id) {
+        return districtRepository.findByCity_Id(id).orElse(null);
+    }
+
+    public List<City> getCities() {
+        return cityRepository.findAll();
     }
 }

@@ -2,18 +2,23 @@ package com.takeIt.controller;
 
 import com.google.gson.Gson;
 import com.takeIt.dto.GiftDTO;
-import com.takeIt.entity.Account;
-import com.takeIt.entity.Category;
 import com.takeIt.entity.Gift;
+import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.AddressService;
 import com.takeIt.service.account.AccountService;
 import com.takeIt.service.category.CategoryService;
-import com.takeIt.service.product.GiftService;
+import com.takeIt.service.gift.GiftService;
+import com.takeIt.specification.GiftSpecification;
+import com.takeIt.specification.SearchCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/_api/products")
@@ -28,10 +33,25 @@ public class GiftController {
     AddressService addressService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Object> getAll() {
+    public ResponseEntity<Object> getAll(
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "ct_id", required = false) String cityId,
+            @RequestParam(value = "d_id", required = false) String districtId,
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit) {
+        Specification specification = Specification.where(null);
+        if (keyword != null && keyword.length() > 0) {
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("name", ":", keyword)))
+                    .or(new GiftSpecification(new SearchCriteria("street_name", ":", keyword)));
+        }
+
+        Page<Gift> giftPage = giftService.giftssWithPaginate(specification, page, limit);
         return new ResponseEntity<>(new RESTResponse.Success()
                 .setStatus(HttpStatus.OK.value())
-                .setMessage(" ")
+                .setPagination(new RESTPagination(page, limit, giftPage.getTotalPages(), giftPage.getTotalElements()))
+                .addData(giftPage.getContent().stream().map(x -> new GiftDTO(x)).collect(Collectors.toList()))
+                .setMessage("")
                 .addData(giftService.getAll()).build(), HttpStatus.OK);
     }
 
@@ -43,6 +63,15 @@ public class GiftController {
                 .setMessage("Save success!")
                 .setStatus(HttpStatus.CREATED.value())
                 .addData(gift).build(), HttpStatus.CREATED);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/all")
+    public ResponseEntity<Object> gifts() {
+
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setMessage("Save success!")
+                .setStatus(HttpStatus.CREATED.value())
+                .addData(giftService.getAll()).build(), HttpStatus.CREATED);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/update/{id}")

@@ -1,8 +1,7 @@
 package com.takeIt.entity;
 
-import javax.persistence.*;
-import java.util.Calendar;
 
+import javax.persistence.*;
 @Entity
 public class Gift {
     @Id
@@ -16,18 +15,18 @@ public class Gift {
     private int gender;
     private int age_range;
     private int status;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Account account;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
-    @OneToOne(mappedBy = "gift")
+    @OneToOne(mappedBy = "gift", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Transaction transaction;
-    @OneToOne(mappedBy = "gift")
+    @OneToOne(mappedBy = "gift", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ExchangeRequest exchangeRequest;
     private String street_name;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private City city;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private District district;
     private long createdAt;
     private long updatedAt;

@@ -2,6 +2,7 @@ package com.takeIt.dto;
 
 import com.takeIt.entity.Gift;
 import com.takeIt.util.DateTimeUtil;
+import com.takeIt.util.ObjectUtil;
 
 public class GiftDTO {
     private long id;
@@ -19,6 +20,7 @@ public class GiftDTO {
     private String deletedAt;
 
     public GiftDTO(Gift gift) {
+        ObjectUtil.cloneObject(this, gift);
         this.id = gift.getId();
         this.name = gift.getName();
         this.description = gift.getDescription();

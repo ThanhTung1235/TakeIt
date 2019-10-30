@@ -138,6 +138,7 @@ public class Account {
     public void setAccountInfo(AccountInfo accountInfo) {
         this.accountInfo = accountInfo;
     }
+
     @JsonIgnore
     public Set<Gift> getGifts() {
         return gifts;

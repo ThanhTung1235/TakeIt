@@ -11,6 +11,7 @@ public class GiftDTO {
     private String gender;
     private String age_range;
     private String accountName;
+    private long accountId;
     private String cityName;
     private String districtName;
     private String street_name;
@@ -28,6 +29,7 @@ public class GiftDTO {
         this.cityName = gift.getCity().getName();
         this.districtName = gift.getDistrict().getName();
         this.street_name = gift.getStreet_name();
+        this.accountId = gift.getAccount().getId();
         this.accountName = gift.getAccount().getUsername();
         this.categoryName = gift.getCategory().getName();
         this.createdAt = DateTimeUtil.formatDateFromLong(gift.getCreatedAt());
@@ -137,5 +139,13 @@ public class GiftDTO {
 
     public void setDeletedAt(String deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 }

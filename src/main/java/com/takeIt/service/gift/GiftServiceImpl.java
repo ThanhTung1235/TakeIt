@@ -25,13 +25,6 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
-    public List<Gift> getAll() {
-        giftRepository.findAll(PageRequest.of(1, 3));
-        return giftRepository.findAllByStatus(1);
-    }
-
-    //update : ten, do tuoi, mo ta san pham, gioi tinh
-    @Override
     public Gift update(long id, Gift gift) {
 //        product.setUpdatedAt(Calendar.getInstance().getTimeInMillis());
         Optional<Gift> p = giftRepository.findById(id);
@@ -54,6 +47,11 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
+    public Page<Gift> getGiftByCategoryId(long id, int status, int page, int limit) {
+        return giftRepository.findByCategory_IdAndStatus(id, status, PageRequest.of(page - 1, limit));
+    }
+
+    @Override
     public Gift getProduct(long id) {
         return giftRepository.findById(id).orElse(null);
     }
@@ -63,7 +61,7 @@ public class GiftServiceImpl implements GiftService {
         Optional<Gift> p = giftRepository.findById(id);
         if (p.isPresent()) {
             Gift g = p.get();
-            g.setStatus(Gift.Status.DELETED.getValue());
+            g.setStatus(Gift.Status.DELETED);
             g.setDeletedAt(Calendar.getInstance().getTimeInMillis());
             giftRepository.save(g);
             return true;

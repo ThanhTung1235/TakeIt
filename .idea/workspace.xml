@@ -8,22 +8,29 @@
   <component name="ChangeListManager">
     <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/TakeItApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/TakeItApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/AddressController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/GiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/GiftController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/District.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/District.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/DistrictRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/DistrictRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/GiftRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/GiftRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/AddressService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/AddressService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/GiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/product/GiftServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/specification/GiftSpecification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/specification/GiftSpecification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/AddressController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/AddressController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/GiftController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/GiftController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/TransactionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/AccountDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/AccountDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/CategoryDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/CategoryDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/CityDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/CityDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/DistrictDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/DistrictDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" afterDir="false" />
@@ -32,7 +39,8 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Category.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/City.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/District.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/District.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest$ExchangeRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest$ExchangeRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest$ExchangeRequestBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/ExchangeRequest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Age_range.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Age_range.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Gender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Gender.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Status.class" afterDir="false" />
@@ -51,9 +59,12 @@
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/category/CategoryServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/product/GiftService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/product/GiftServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/gift/GiftService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/gift/GiftService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/gift/GiftServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/gift/GiftServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/specification/GiftSpecification.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/specification/GiftSpecification.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/specification/SearchCriteria.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/specification/SearchCriteria.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/util/DateTimeUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/util/DateTimeUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/util/ObjectUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/util/ObjectUtil.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,6 +116,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15820312" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -175,7 +187,10 @@
       <workItem from="1572057234397" duration="3330000" />
       <workItem from="1572107249113" duration="1079000" />
       <workItem from="1572190176414" duration="2581000" />
-      <workItem from="1572227831489" duration="5152000" />
+      <workItem from="1572227831489" duration="14946000" />
+      <workItem from="1572280185539" duration="6792000" />
+      <workItem from="1572313122062" duration="22625000" />
+      <workItem from="1572403189761" duration="1982000" />
     </task>
     <servers />
   </component>
@@ -194,19 +209,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java</url>
-          <line>63</line>
-          <properties class="com.takeIt.entity.AccountInfo" method="setAccount">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

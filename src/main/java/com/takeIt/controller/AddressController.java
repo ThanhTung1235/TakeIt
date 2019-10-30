@@ -6,21 +6,20 @@ import com.takeIt.dto.DistrictDTO;
 import com.takeIt.dto.GiftDTO;
 import com.takeIt.entity.City;
 import com.takeIt.entity.District;
+import com.takeIt.entity.Gift;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.swing.plaf.PanelUI;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/_api/address")
 public class AddressController {
     @Autowired
@@ -36,7 +35,7 @@ public class AddressController {
                 .build(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET,value = "/cities")
+    @RequestMapping(method = RequestMethod.GET, value = "/cities")
     public ResponseEntity<Object> getCities() {
         List<City> cities = addressService.getCities();
         return new ResponseEntity<>(new RESTResponse.Success()

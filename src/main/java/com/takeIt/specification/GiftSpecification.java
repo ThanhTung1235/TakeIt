@@ -1,12 +1,10 @@
 package com.takeIt.specification;
 
+import com.takeIt.entity.City;
 import com.takeIt.entity.Gift;
 import org.springframework.data.jpa.domain.Specification;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 
 public class GiftSpecification implements Specification<Gift> {
     private SearchCriteria criteria;
@@ -25,9 +23,11 @@ public class GiftSpecification implements Specification<Gift> {
                     root.<String>get(criteria.getKey()), criteria.getValue().toString());
         } else if (criteria.getOperation().equalsIgnoreCase(":")) {
             if (root.get(criteria.getKey()).getJavaType() == String.class) {
+                System.out.println(criteria.getKey() + " - " + criteria.getValue());
                 return builder.like(
                         root.<String>get(criteria.getKey()), "%" + criteria.getValue() + "%");
             } else {
+                System.out.println("is null");
                 return builder.equal(root.get(criteria.getKey()), criteria.getValue());
             }
         }

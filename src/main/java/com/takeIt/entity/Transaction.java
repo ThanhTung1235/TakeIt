@@ -1,6 +1,7 @@
 package com.takeIt.entity;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 public class Transaction {
@@ -11,8 +12,16 @@ public class Transaction {
     private Account account;
     @OneToOne
     private Gift gift;
+    @OneToOne
+    private ExchangeRequest exchangeRequest;
     private int status;
-    private int confirm_owner;
+    private long createdAt;
+    private long updatedAt;
+
+    public Transaction() {
+        this.createdAt = Calendar.getInstance().getTimeInMillis();
+        this.updatedAt = Calendar.getInstance().getTimeInMillis();
+    }
 
     public long getId() {
         return Id;
@@ -46,12 +55,28 @@ public class Transaction {
         this.status = status.getValue();
     }
 
-    public int getConfirm_owner() {
-        return confirm_owner;
+    public ExchangeRequest getExchangeRequest() {
+        return exchangeRequest;
     }
 
-    public void setConfirm_owner(int confirm_owner) {
-        this.confirm_owner = confirm_owner;
+    public void setExchangeRequest(ExchangeRequest exchangeRequest) {
+        this.exchangeRequest = exchangeRequest;
+    }
+
+    public long getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public enum Status {

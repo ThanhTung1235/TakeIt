@@ -1,17 +1,20 @@
 package com.takeIt.entity;
 
+import com.google.gson.Gson;
+
 import javax.persistence.*;
 
 @Entity
 public class ExchangeRequest {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String message;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Account account;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Gift gift;
+    @OneToOne(mappedBy = "exchangeRequest", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    private Transaction transaction;
     private int status;
 
     public long getId() {
@@ -50,6 +53,14 @@ public class ExchangeRequest {
         return status;
     }
 
+    public Transaction getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
+    }
+
     public void setStatus(Status status) {
         this.status = status.getValue();
     }
@@ -75,5 +86,11 @@ public class ExchangeRequest {
             }
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        ExchangeRequest exchangeRequest = new ExchangeRequest();
+        exchangeRequest.setStatus(Status.CONFIRMED);
+        System.out.println(new Gson().toJson(exchangeRequest.getStatus()));
     }
 }

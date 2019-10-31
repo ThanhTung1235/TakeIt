@@ -19,6 +19,7 @@ public class GiftDTO {
     private String createdAt;
     private String updatedAt;
     private String deletedAt;
+    private String email;
 
     public GiftDTO(Gift gift) {
         ObjectUtil.cloneObject(this, gift);
@@ -32,9 +33,18 @@ public class GiftDTO {
         this.accountId = gift.getAccount().getId();
         this.accountName = gift.getAccount().getUsername();
         this.categoryName = gift.getCategory().getName();
+        this.email = gift.getAccount().getAccountInfo().getEmail();
         this.createdAt = DateTimeUtil.formatDateFromLong(gift.getCreatedAt());
         this.updatedAt = DateTimeUtil.formatDateFromLong(gift.getUpdatedAt());
         this.deletedAt = DateTimeUtil.formatDateFromLong(gift.getDeletedAt());
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {

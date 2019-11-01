@@ -1,5 +1,7 @@
 package com.takeIt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;
@@ -14,9 +16,9 @@ public class Account {
     private String password;
     private long createdAt;
     private long updatedAt;
-    @OneToOne(mappedBy = "account",cascade = {CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private AccountInfo accountInfo;
-    @OneToMany(mappedBy = "account" ,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     private Set<Gift> gifts;
     private int status;
     private int role;
@@ -134,5 +136,14 @@ public class Account {
 
     public void setAccountInfo(AccountInfo accountInfo) {
         this.accountInfo = accountInfo;
+    }
+
+    @JsonIgnore
+    public Set<Gift> getGifts() {
+        return gifts;
+    }
+
+    public void setGifts(Set<Gift> gifts) {
+        this.gifts = gifts;
     }
 }

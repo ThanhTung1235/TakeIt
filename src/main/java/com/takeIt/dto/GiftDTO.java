@@ -2,6 +2,7 @@ package com.takeIt.dto;
 
 import com.takeIt.entity.Gift;
 import com.takeIt.util.DateTimeUtil;
+import com.takeIt.util.ObjectUtil;
 
 public class GiftDTO {
     private long id;
@@ -10,6 +11,7 @@ public class GiftDTO {
     private String gender;
     private String age_range;
     private String accountName;
+    private long accountId;
     private String cityName;
     private String districtName;
     private String street_name;
@@ -17,8 +19,10 @@ public class GiftDTO {
     private String createdAt;
     private String updatedAt;
     private String deletedAt;
+    private String email;
 
     public GiftDTO(Gift gift) {
+        ObjectUtil.cloneObject(this, gift);
         this.id = gift.getId();
         this.name = gift.getName();
         this.description = gift.getDescription();
@@ -26,11 +30,21 @@ public class GiftDTO {
         this.cityName = gift.getCity().getName();
         this.districtName = gift.getDistrict().getName();
         this.street_name = gift.getStreet_name();
+        this.accountId = gift.getAccount().getId();
         this.accountName = gift.getAccount().getUsername();
         this.categoryName = gift.getCategory().getName();
+        this.email = gift.getAccount().getAccountInfo().getEmail();
         this.createdAt = DateTimeUtil.formatDateFromLong(gift.getCreatedAt());
         this.updatedAt = DateTimeUtil.formatDateFromLong(gift.getUpdatedAt());
         this.deletedAt = DateTimeUtil.formatDateFromLong(gift.getDeletedAt());
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {
@@ -135,5 +149,13 @@ public class GiftDTO {
 
     public void setDeletedAt(String deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(long accountId) {
+        this.accountId = accountId;
     }
 }

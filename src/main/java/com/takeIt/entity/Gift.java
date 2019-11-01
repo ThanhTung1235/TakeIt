@@ -1,7 +1,8 @@
 package com.takeIt.entity;
 
+
 import javax.persistence.*;
-import java.util.Calendar;
+import java.util.Set;
 
 @Entity
 public class Gift {
@@ -16,18 +17,18 @@ public class Gift {
     private int gender;
     private int age_range;
     private int status;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Account account;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Category category;
-    @OneToOne(mappedBy = "gift")
+    @OneToOne(mappedBy = "gift", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Transaction transaction;
-    @OneToOne(mappedBy = "gift")
-    private ExchangeRequest exchangeRequest;
+    @OneToMany(mappedBy = "gift", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private Set<ExchangeRequest> exchangeRequest;
     private String street_name;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private City city;
-    @OneToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private District district;
     private long createdAt;
     private long updatedAt;
@@ -141,10 +142,6 @@ public class Gift {
         return transaction;
     }
 
-    public ExchangeRequest getExchangeRequest() {
-        return exchangeRequest;
-    }
-
     public String getStreet_name() {
         return street_name;
     }
@@ -189,8 +186,8 @@ public class Gift {
         this.age_range = age_range;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatus(Status status) {
+        this.status = status.getValue();
     }
 
     public void setAccount(Account account) {
@@ -203,10 +200,6 @@ public class Gift {
 
     public void setTransaction(Transaction transaction) {
         this.transaction = transaction;
-    }
-
-    public void setExchangeRequest(ExchangeRequest exchangeRequest) {
-        this.exchangeRequest = exchangeRequest;
     }
 
     public void setStreet_name(String street_name) {
@@ -231,5 +224,13 @@ public class Gift {
 
     public void setDeletedAt(long deletedAt) {
         this.deletedAt = deletedAt;
+    }
+
+    public Set<ExchangeRequest> getExchangeRequest() {
+        return exchangeRequest;
+    }
+
+    public void setExchangeRequest(Set<ExchangeRequest> exchangeRequest) {
+        this.exchangeRequest = exchangeRequest;
     }
 }

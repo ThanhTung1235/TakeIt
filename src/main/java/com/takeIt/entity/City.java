@@ -1,6 +1,9 @@
 package com.takeIt.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "devvn_tinhthanhpho")
@@ -10,8 +13,11 @@ public class City {
     private long id;
     private String name;
     private String type;
-    @OneToOne(mappedBy = "city")
-    private Gift gift;
+    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Gift> gifts;
+    @OneToMany(mappedBy = "city", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private Set<District> districts;
+
 
     public long getId() {
         return id;
@@ -37,11 +43,20 @@ public class City {
         this.type = type;
     }
 
-    public Gift getGift() {
-        return gift;
+    @JsonIgnore
+    public Set<Gift> getGifts() {
+        return gifts;
     }
 
-    public void setGift(Gift gift) {
-        this.gift = gift;
+    public void setGifts(Set<Gift> gifts) {
+        this.gifts = gifts;
+    }
+
+    public Set<District> getDistricts() {
+        return districts;
+    }
+
+    public void setDistricts(Set<District> districts) {
+        this.districts = districts;
     }
 }

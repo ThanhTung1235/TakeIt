@@ -6,33 +6,22 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/AccountInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/TakeIt.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" afterDir="false" />
-=======
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/AccountInfoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/config/MyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/config/MailConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" afterDir="false" />
->>>>>>> 6865f1a1fe6d8e71aef7fba99e9a5d57563cb57e
-    </list>
+      <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
+          <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/AccountInfoRepository.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/config/MyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/config/MailConfig.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestService.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" afterDir="false" />
+          <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" afterDir="false" />
+      </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,14 +151,6 @@
       <updated>1571631600569</updated>
       <workItem from="1571631608423" duration="11292000" />
       <workItem from="1571709477141" duration="23667000" />
-<<<<<<< HEAD
-      <workItem from="1571824049489" duration="12423000" />
-      <workItem from="1571884559828" duration="6728000" />
-      <workItem from="1572229736395" duration="2839000" />
-      <workItem from="1572345115654" duration="2434000" />
-      <workItem from="1572409900464" duration="6570000" />
-      <workItem from="1572593025813" duration="1767000" />
-=======
       <workItem from="1571824049489" duration="12721000" />
       <workItem from="1571880726278" duration="11522000" />
       <workItem from="1571968096646" duration="17286000" />
@@ -183,7 +164,6 @@
       <workItem from="1572403189761" duration="1982000" />
       <workItem from="1572412096681" duration="293000" />
       <workItem from="1572485520880" duration="22752000" />
->>>>>>> 6865f1a1fe6d8e71aef7fba99e9a5d57563cb57e
     </task>
     <servers />
   </component>

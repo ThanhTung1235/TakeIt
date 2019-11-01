@@ -2,6 +2,7 @@ package com.takeIt.dto;
 
 import com.takeIt.entity.AccountInfo;
 import com.takeIt.util.DateTimeUtil;
+import com.takeIt.util.ObjectUtil;
 import org.springframework.util.ObjectUtils;
 
 public class InfoDTO {
@@ -16,7 +17,7 @@ public class InfoDTO {
     private String updatedAt;
 
     public InfoDTO(AccountInfo info) {
-
+        ObjectUtil.cloneObject(this, info);
         this.id = info.getId();
         this.firstName = info.getFirstName();
         this.lastName = info.getLastName();

@@ -22,10 +22,10 @@ public class AccountInfoServiceImpl implements AccountInfoService {
         return accountInfoRepository.save(accountInfo);
     }
 
-    @Override
-    public List<AccountInfo> getAll() {
-        return accountInfoRepository.findAll();
-    }
+//    @Override
+//    public List<AccountInfo> getAll() {
+//        return accountInfoRepository.findAll();
+//    }
 
     @Override
     public AccountInfo update(long id, AccountInfo accountInfo) {

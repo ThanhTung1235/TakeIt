@@ -7,7 +7,7 @@ import java.util.List;
 public interface AccountInfoService {
     AccountInfo store(AccountInfo accountInfo);
 
-    List<AccountInfo> getAll();
+//    List<AccountInfo> getAll();
 
     AccountInfo update(long id, AccountInfo accountInfo);
 

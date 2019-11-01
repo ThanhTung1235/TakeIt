@@ -1,6 +1,7 @@
 package com.takeIt.controller;
 
 import com.google.gson.Gson;
+import com.takeIt.dto.InfoDTO;
 import com.takeIt.entity.AccountInfo;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.accountInfo.AccountInfoService;
@@ -15,13 +16,6 @@ public class AccountInfoController {
     @Autowired
     AccountInfoService accountInfoService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Object> getAll() {
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setStatus(HttpStatus.OK.value())
-                .setMessage(" ")
-                .addData(accountInfoService.getAll()).build(), HttpStatus.OK);
-    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     public ResponseEntity<Object> saveProduct(@RequestBody AccountInfo accountInfo) {
@@ -49,22 +43,22 @@ public class AccountInfoController {
 //
 //    }
 //
-//    @RequestMapping(method = RequestMethod.GET, value = "/detail/{id}")
-//    public ResponseEntity<Object> getAccountInfo(@PathVariable long id) {
-//        AccountInfo accountInfo = accountInfoService.getAccountInfo(id);
-//        if (accountInfo == null)
-//            return new ResponseEntity<>(new RESTResponse.SimpleError()
-//                    .setCode(HttpStatus.NOT_FOUND.value())
-//                    .setMessage("Product not found")
-//                    .build(),
-//                    HttpStatus.NOT_FOUND);
-//        else
-//            return new ResponseEntity<>(new RESTResponse.Success()
-//                    .setStatus(HttpStatus.OK.value())
-//                    .setMessage("Success")
-//                    .addData(accountInfo)
-//                    .build(),
-//                    HttpStatus.OK);
-//    }
+    @RequestMapping(method = RequestMethod.GET, value = "/detail/{id}")
+    public ResponseEntity<Object> getAccountInfo(@PathVariable long id) {
+        AccountInfo accountInfo = accountInfoService.getAccountInfo(id);
+        if (accountInfo == null)
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage("Product not found")
+                    .build(),
+                    HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage("Success")
+                    .addData(new InfoDTO(accountInfoService.getAccountInfo(id)))
+                    .build(),
+                    HttpStatus.OK);
+    }
 
 }

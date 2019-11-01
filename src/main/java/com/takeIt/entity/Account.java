@@ -1,6 +1,5 @@
 package com.takeIt.entity;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;

@@ -7,6 +7,7 @@ import com.takeIt.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -125,10 +126,10 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
                 "    </div>\n" +
                 "    <div style=\"justify-content: space-evenly;display:flex;margin-top: 20px\">\n" +
                 "      <a href='" + confirm + "' class=\"btn\" style=\"background: #007bff; color: #fff\">\n" +
-                "      Xác nhận\n" +
+                "      Xac nhan\n" +
                 "    </a>\n" +
-                "    <a href='" + cancel + "' class=\"btn\" style=\"background: #dc3545 ; color: #fff\">\n" +
-                "      Không chấp nhận\n" +
+                "    <a href='" + cancel + "' class=\"btn\" style=\"background: #dc3545 ;text-decoration: none; color: #fff\">\n" +
+                "      Khong chap nhan\n" +
                 "    </a>\n" +
                 "    </div>\n" +
                 "<p style=\"font-size:12px\" class=\"text-center text-secondary mt-3\"> Company Email: simpletake0420@gmail.com <br> Contact: 0123456789</p>\n" +
@@ -150,6 +151,14 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
 
         transactionRepository.save(transaction);
 //        gui lai mail cho receiver
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setSubject("Simple Take message");
+        mailMessage.setText("Tuyệt " + exchangeRequest.getGift().getAccount().getUsername()
+                + "đã đồng ý bạn nhận món đồ "
+                + exchangeRequest.getGift().getName()
+                + ". Bây giờ chỉ cần thỏa thuận thời gian và cách nhận đồ nữa thôi.");
+        mailMessage.setTo(exchangeRequest.getAccount().getAccountInfo().getEmail());
+        emailSender.send(mailMessage);
     }
 
 }

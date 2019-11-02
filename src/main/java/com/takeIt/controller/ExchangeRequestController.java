@@ -30,14 +30,14 @@ public class ExchangeRequestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Object> saveRequest(@RequestBody ExchangeRequest exchangeRequest) throws MessagingException {
         if (exchangeRequest.getAccount().getId() != exchangeRequest.getGift().getAccount().getId()) {
-            AccountInfo accountInfo = infoService.getAccountInfo(exchangeRequest.getAccount().getId());
+            AccountInfo accountInfo = infoService.getAccountInfo(exchangeRequest.getGift().getAccount().getId());
             if (accountInfo == null) {
                 return new ResponseEntity<>(new RESTResponse.Success()
                         .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
                         .setMessage("Some thing wrong").build(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
             exchangeRequest.setId(Calendar.getInstance().getTimeInMillis());
-            requestService.sendSimpleMessage(accountInfo.getEmail(), accountInfo.getFirstName() + accountInfo.getLastName(), exchangeRequest.getId(), "Just test email text", "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
+            requestService.sendSimpleMessage(accountInfo.getEmail(), exchangeRequest.getAccount().getUsername(), exchangeRequest.getId(), "Just test email text", "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
             exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);
             requestService.store(exchangeRequest);
             return new ResponseEntity<>(new RESTResponse.Success()

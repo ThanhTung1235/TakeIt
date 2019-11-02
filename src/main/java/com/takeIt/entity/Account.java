@@ -2,7 +2,6 @@ package com.takeIt.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Calendar;
 import java.util.Set;

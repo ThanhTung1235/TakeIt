@@ -7,7 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/AccountInfoRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/config/MyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/config/MailConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/ExchangeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +63,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../spring-boot-rest-api-full" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../spring-boot-rest-api-full" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -106,7 +119,7 @@
       </method>
     </configuration>
     <configuration name="TakeItApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="TakeIt" />
+      <module name="takeIt" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.takeIt.*" />
@@ -114,6 +127,7 @@
         </pattern>
       </extension>
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.takeIt.TakeItApplication" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

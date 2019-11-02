@@ -80,4 +80,5 @@ public class AccountInfo {
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }

@@ -1,12 +1,11 @@
 package com.takeIt.controller;
 
-import com.google.gson.Gson;
 import com.takeIt.dto.RequestDTO;
 import com.takeIt.entity.AccountInfo;
 import com.takeIt.entity.ExchangeRequest;
 import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
-import com.takeIt.service.account.AccountInfoService;
+import com.takeIt.service.accountInfo.AccountInfoService;
 import com.takeIt.service.exchangeRequest.ExchangeRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,7 +29,7 @@ public class ExchangeRequestController {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Object> saveRequest(@RequestBody ExchangeRequest exchangeRequest) throws MessagingException {
         if (exchangeRequest.getAccount().getId() != exchangeRequest.getGift().getAccount().getId()) {
-            AccountInfo accountInfo = infoService.getAccountInfo(exchangeRequest.getGift().getAccount().getId());
+            AccountInfo accountInfo = infoService.getAccountInfoByAccountId(exchangeRequest.getGift().getAccount().getId());
             if (accountInfo == null) {
                 return new ResponseEntity<>(new RESTResponse.Success()
                         .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())

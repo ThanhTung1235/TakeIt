@@ -14,4 +14,6 @@ public interface AccountInfoService {
     AccountInfo getAccountInfo(long id);
 
     boolean delete(long id);
+
+    AccountInfo getAccountInfoByAccountId(long id);
 }

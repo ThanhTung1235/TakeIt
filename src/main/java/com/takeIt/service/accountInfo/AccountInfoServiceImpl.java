@@ -42,5 +42,10 @@ public class AccountInfoServiceImpl implements AccountInfoService {
         return false;
     }
 
+    @Override
+    public AccountInfo getAccountInfoByAccountId(long id) {
+        return accountInfoRepository.findByAccount_Id(id).orElse(null);
+    }
+
 
 }

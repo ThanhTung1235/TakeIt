@@ -17,10 +17,14 @@ public class Transaction {
     private int status;
     private long createdAt;
     private long updatedAt;
+    private long expirationAt;
 
     public Transaction() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, 3);
         this.createdAt = Calendar.getInstance().getTimeInMillis();
         this.updatedAt = Calendar.getInstance().getTimeInMillis();
+        this.expirationAt = calendar.getTimeInMillis();
     }
 
     public long getId() {
@@ -79,13 +83,18 @@ public class Transaction {
         this.updatedAt = updatedAt;
     }
 
+    public long getExpirationAt() {
+        return expirationAt;
+    }
+
+    public void setExpirationAt(long expirationAt) {
+        this.expirationAt = expirationAt;
+    }
+
     public enum Status {
-        CANCEL_EXCHANGING(-2),
-        CANCEL(-1),
-        PENDING_CONFIRM(0),
-        PENDING(1),
-        IS_EXCHANGING(2),
-        DONE(3);
+        CANCEL_EXCHANGING(-1),
+        IS_EXCHANGING(0),
+        DONE(1);
 
         int value;
 

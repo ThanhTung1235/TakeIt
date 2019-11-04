@@ -146,7 +146,7 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         Transaction transaction = new Transaction();
         transaction.setAccount(exchangeRequest.getAccount());
         transaction.setGift(exchangeRequest.getGift());
-        transaction.setStatus(Transaction.Status.PENDING);
+        transaction.setStatus(Transaction.Status.IS_EXCHANGING);
         transaction.setExchangeRequest(exchangeRequest);
 
         transactionRepository.save(transaction);
@@ -154,7 +154,7 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setSubject("Simple Take message");
         mailMessage.setText("Tuyệt " + exchangeRequest.getGift().getAccount().getUsername()
-                + "đã đồng ý bạn nhận món đồ "
+                + " đã đồng ý bạn nhận món đồ "
                 + exchangeRequest.getGift().getName()
                 + ". Bây giờ chỉ cần thỏa thuận thời gian và cách nhận đồ nữa thôi.");
         mailMessage.setTo(exchangeRequest.getAccount().getAccountInfo().getEmail());

@@ -14,6 +14,7 @@ public class AccountInfo {
     private long dob;
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
+    private String avatar;
     private long createdAt;
     private long updatedAt;
 
@@ -81,4 +82,11 @@ public class AccountInfo {
         this.updatedAt = updatedAt;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }

@@ -1,6 +1,8 @@
 package com.takeIt.service.transaction;
 
+import com.takeIt.entity.Gift;
 import com.takeIt.entity.Transaction;
+import com.takeIt.repository.GiftRepository;
 import com.takeIt.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,8 @@ public class TransactionServiceImpl implements TransactionService {
     TransactionRepository transactionRepository;
     @Autowired
     public JavaMailSender emailSender;
+    @Autowired
+    GiftRepository giftRepository;
 
     @Override
     public Transaction store(Transaction transaction) {
@@ -123,12 +127,19 @@ public class TransactionServiceImpl implements TransactionService {
         Optional<Transaction> optional = transactionRepository.findById(id);
         if (optional.isPresent()) {
             Transaction transaction = optional.get();
+            Optional<Gift> optionalGift = giftRepository.findById(transaction.getGift().getId());
+            Gift gift = optionalGift.get();
+            transaction.getGift().getId();
             if (status) {
                 transaction.setStatus(Transaction.Status.DONE);
+                gift.setStatus(Gift.Status.EXCHANGE_DONE);
                 transactionRepository.save(transaction);
+                giftRepository.save(gift);
             } else {
                 transaction.setStatus(Transaction.Status.CANCEL_EXCHANGING);
+                gift.setStatus(Gift.Status.ACTIVE);
                 transactionRepository.save(transaction);
+                giftRepository.save(gift);
             }
         }
         return null;

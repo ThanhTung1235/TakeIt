@@ -45,13 +45,21 @@ public class TransactionEndpoint {
     public ResponseEntity<Object> search(
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
-        Page<Transaction> transactions = transactionService.getAll(page, limit);
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setStatus(HttpStatus.OK.value())
-                .setPagination(new RESTPagination(page, limit, transactions.getTotalPages(), transactions.getTotalElements()))
-                .addData(transactions.getContent().stream().map(x -> new TransactionDTO(x)).collect(Collectors.toList()))
-                .setMessage("")
-                .build(), HttpStatus.OK);
+        try {
+            Page<Transaction> transactions = transactionService.getAll(page, limit);
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setPagination(new RESTPagination(page, limit, transactions.getTotalPages(), transactions.getTotalElements()))
+                    .addData(transactions.getContent().stream().map(x -> new TransactionDTO(x)).collect(Collectors.toList()))
+                    .setMessage("")
+                    .build(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .setMessage("server error").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/transactionConfirm")
@@ -62,7 +70,6 @@ public class TransactionEndpoint {
             Date currentDate = simpleDateFormat.parse(simpleDateFormat.format(Calendar.getInstance().getTimeInMillis()));
             for (Transaction transaction : transactions) {
                 Date exDate = simpleDateFormat.parse(simpleDateFormat.format(transaction.getExpirationAt()));
-                System.out.println("exDate: " + exDate + " currentDate: " + currentDate);
                 if (currentDate.compareTo(exDate) == 0) {
                     Gift gift = giftService.getProduct(transaction.getGift().getId());
                     long accountId = gift.getAccount().getId();
@@ -74,21 +81,33 @@ public class TransactionEndpoint {
                 } else System.out.println("not equals date");
 
             }
-            return null;
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage("ok").build(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .setMessage("server error").build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-//http://localhost:8080/_api/transactions/exchangeConfirm/13?status=true   ||confirm exchange done
+
+    //http://localhost:8080/_api/transactions/exchangeConfirm/13?status=true   ||confirm exchange done
     @RequestMapping(value = "/exchangeConfirm/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> changeStatusTransaction(
             @PathVariable long id,
             @RequestParam(value = "status", required = false) boolean status) {
-        Transaction transaction = transactionService.updateStatusTransaction(id, status);
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setStatus(HttpStatus.OK.value())
-                .addData(null)
-                .setMessage(" ").build(), HttpStatus.OK);
+        try {
+            transactionService.updateStatusTransaction(id, status);
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage(" ").build(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .setMessage("server error").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

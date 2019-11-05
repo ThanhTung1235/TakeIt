@@ -30,6 +30,7 @@ public class Gift {
     private City city;
     @ManyToOne(cascade = CascadeType.ALL)
     private District district;
+    private String thumbnail;
     private long createdAt;
     private long updatedAt;
     private long deletedAt;
@@ -38,7 +39,9 @@ public class Gift {
     public enum Status {
         DELETED(-1),
         PENDING(0),
-        ACTIVE(1);
+        ACTIVE(1),
+        EXCHANGE_DONE(2);
+
         int value;
 
         Status(int value) {
@@ -232,5 +235,13 @@ public class Gift {
 
     public void setExchangeRequest(Set<ExchangeRequest> exchangeRequest) {
         this.exchangeRequest = exchangeRequest;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

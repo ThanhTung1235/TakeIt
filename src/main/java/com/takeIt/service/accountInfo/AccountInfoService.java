@@ -7,6 +7,8 @@ import java.util.List;
 public interface AccountInfoService {
     AccountInfo store(AccountInfo accountInfo);
 
+    AccountInfo findByAccountId(long id);
+    AccountInfo findByAccountInfoId(long id);
 //    List<AccountInfo> getAll();
 
     AccountInfo update(long id, AccountInfo accountInfo);

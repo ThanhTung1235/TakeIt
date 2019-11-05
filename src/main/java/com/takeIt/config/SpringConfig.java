@@ -1,9 +1,6 @@
 package com.takeIt.config;
 
-import com.google.gson.Gson;
-import com.takeIt.controller.AddressController;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
+import com.takeIt.endpoint.client.AddressEndpoint;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -25,28 +22,18 @@ public class SpringConfig {
     @Scheduled(cron = "0 0 0 * * ?")
     public void testScheduling() {
         System.out.println("Current time = :" + date.format(new Date()));
-        AddressController addressController = new AddressController();
-        addressController.getCities();
+        AddressEndpoint addressEndpoint = new AddressEndpoint();
+        addressEndpoint.getCities();
 
     }
 
     public static void main(String[] args) throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-        Calendar cal = Calendar.getInstance();
-        System.out.println(cal.getTimeInMillis());
-
-        cal.add(Calendar.DATE, 3);
-        System.out.println(sdf.format(cal.getTime()));
-
-        Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        Date d = new Date(1572797062);
-
-        if (d.compareTo(date) == 0) {
-            System.out.println("is true");
-        } else {
-            System.out.println("is not fun fucking idiot");
-        }
-
+//        System.out.println(java.time.LocalDate.now());
+//        LocalDate date = LocalDate.now();
+//        LocalDate date1 = date.plusDays(3);
+//        String a = date1.toString();
+//        System.out.println(a);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = simpleDateFormat.parse(simpleDateFormat.format(Calendar.getInstance().getTimeInMillis()));
     }
 }

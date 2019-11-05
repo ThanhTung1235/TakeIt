@@ -68,5 +68,4 @@ public class GiftServiceImpl implements GiftService {
         }
         return false;
     }
-
 }

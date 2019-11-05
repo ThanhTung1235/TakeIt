@@ -1,4 +1,4 @@
-package com.takeIt.controller;
+package com.takeIt.endpoint.client;
 
 import com.google.gson.Gson;
 import com.takeIt.dto.InfoDTO;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/_api/account-info")
-public class AccountInfoController {
+public class AccountInfoEndpoint {
     @Autowired
     AccountInfoService accountInfoService;
 

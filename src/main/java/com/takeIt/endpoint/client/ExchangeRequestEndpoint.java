@@ -1,4 +1,4 @@
-package com.takeIt.controller;
+package com.takeIt.endpoint.client;
 
 import com.takeIt.dto.RequestDTO;
 import com.takeIt.entity.AccountInfo;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(value = "/_api/exchanges")
 @CrossOrigin
-public class ExchangeRequestController {
+public class ExchangeRequestEndpoint {
     @Autowired
     ExchangeRequestService requestService;
     @Autowired

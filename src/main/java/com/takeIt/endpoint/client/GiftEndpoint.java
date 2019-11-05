@@ -1,4 +1,4 @@
-package com.takeIt.controller;
+package com.takeIt.endpoint.client;
 
 import com.google.gson.Gson;
 import com.takeIt.dto.GiftDTO;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/_api/products")
-public class GiftController {
+public class GiftEndpoint {
     @Autowired
     GiftService giftService;
     @Autowired

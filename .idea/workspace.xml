@@ -7,34 +7,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/config/SpringConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/TransactionDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/takeIt/config/SpringConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/TransactionDTO.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/TransactionEndpoint.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/TakeItApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/TakeItApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/AddressController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountInfoService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountInfoServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/accountInfo/AccountInfoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/accountInfo/AccountInfoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/accountInfo/AccountInfoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/accountInfo/AccountInfoServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/config/SpringConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/AccountInfoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/AccountInfoEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/AddressController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/AddressEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/ExchangeRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/ExchangeRequestEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/GiftController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/GiftEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/controller/TransactionController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/gift/GiftServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/transaction/TransactionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/transaction/TransactionService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/transaction/TransactionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/transaction/TransactionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/TakeItApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/AddressController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/AddressController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/TransactionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/controller/TransactionController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction$Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Transaction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountInfoService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountInfoServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/accountInfo/AccountInfoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/accountInfo/AccountInfoService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/accountInfo/AccountInfoServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/accountInfo/AccountInfoServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/exchangeRequest/ExchangeRequestServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/config/SpringConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/config/SpringConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/AccountInfoController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/AddressController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/ExchangeRequestController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/GiftController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/controller/TransactionController.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/transaction/TransactionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/transaction/TransactionService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/transaction/TransactionServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/transaction/TransactionServiceImpl.class" afterDir="false" />
     </list>
@@ -120,7 +109,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SpringConfig">
+  <component name="RunManager" selected="Spring Boot.TakeItApplication (1)">
     <configuration name="ExchangeRequest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.takeIt.entity.ExchangeRequest" />
       <module name="TakeIt" />
@@ -213,7 +202,8 @@
       <workItem from="1572793926103" duration="3398000" />
       <workItem from="1572797587825" duration="476000" />
       <workItem from="1572836989565" duration="279000" />
-      <workItem from="1572850569565" duration="172000" />
+      <workItem from="1572850569565" duration="714000" />
+      <workItem from="1572918131805" duration="15495000" />
     </task>
     <servers />
   </component>

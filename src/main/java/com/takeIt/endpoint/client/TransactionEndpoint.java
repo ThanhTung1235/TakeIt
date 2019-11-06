@@ -70,16 +70,17 @@ public class TransactionEndpoint {
             Date currentDate = simpleDateFormat.parse(simpleDateFormat.format(Calendar.getInstance().getTimeInMillis()));
             for (Transaction transaction : transactions) {
                 Date exDate = simpleDateFormat.parse(simpleDateFormat.format(transaction.getExpirationAt()));
-                if (currentDate.compareTo(exDate) == 0) {
-                    Gift gift = giftService.getProduct(transaction.getGift().getId());
-                    long accountId = gift.getAccount().getId();
-                    AccountInfo accountInfo = accountInfoService.getAccountInfoByAccountId(accountId);
-                    Account account = accountService.getAccount(transaction.getAccount().getId());
+                if (transaction.getStatus() == 0) {
+                    if (currentDate.compareTo(exDate) == 0) {
+                        Gift gift = giftService.getProduct(transaction.getGift().getId());
+                        long accountId = gift.getAccount().getId();
+                        AccountInfo accountInfo = accountInfoService.getAccountInfoByAccountId(accountId);
+                        Account account = accountService.getAccount(transaction.getAccount().getId());
 
-                    transactionService.sendMailConfirm(accountInfo.getEmail(), account.getUsername(), transaction.getId(), "", "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
-                    System.out.println("equals date");
-                } else System.out.println("not equals date");
-
+                        transactionService.sendMailConfirm(accountInfo.getEmail(), account.getUsername(), transaction.getId(), "", "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
+                        System.out.println("equals date");
+                    } else System.out.println("not equals date");
+                }
             }
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.OK.value())

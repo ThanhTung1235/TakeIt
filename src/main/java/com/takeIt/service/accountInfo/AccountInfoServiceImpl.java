@@ -22,6 +22,17 @@ public class AccountInfoServiceImpl implements AccountInfoService {
         return accountInfoRepository.save(accountInfo);
     }
 
+    //son.6-11
+    @Override
+    public AccountInfo findByAccountId(long id) {
+        return accountInfoRepository.findAccountInfoByAccount_Id(id).orElse(null);
+    }
+    //son.6-11
+    @Override
+    public AccountInfo findByAccountInfoId(long id) {
+        return accountInfoRepository.findAccountInfoById(id).orElse(null);
+    }
+
 //    @Override
 //    public List<AccountInfo> getAll() {
 //        return accountInfoRepository.findAll();

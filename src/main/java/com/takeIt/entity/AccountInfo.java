@@ -1,6 +1,7 @@
 package com.takeIt.entity;
 
 import javax.persistence.*;
+import java.util.Calendar;
 
 @Entity
 public class AccountInfo {
@@ -17,6 +18,11 @@ public class AccountInfo {
     private String avatar;
     private long createdAt;
     private long updatedAt;
+
+    public AccountInfo() {
+        this.createdAt = Calendar.getInstance().getTimeInMillis();
+        this.updatedAt = Calendar.getInstance().getTimeInMillis();
+    }
 
     public long getId() {
         return id;

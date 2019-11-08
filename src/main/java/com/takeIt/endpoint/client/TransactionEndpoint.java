@@ -61,7 +61,7 @@ public class TransactionEndpoint {
         }
 
     }
-
+    //http://localhost:8080/_api/transactions/transactionConfirm
     @RequestMapping(method = RequestMethod.GET, value = "/transactionConfirm")
     public ResponseEntity<Object> checkExpiration() {
         try {

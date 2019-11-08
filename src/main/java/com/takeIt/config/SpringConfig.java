@@ -1,6 +1,7 @@
 package com.takeIt.config;
 
 import com.takeIt.endpoint.client.AddressEndpoint;
+import com.takeIt.endpoint.client.TransactionEndpoint;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -17,13 +18,11 @@ import java.util.Date;
 @Component
 @EnableScheduling
 public class SpringConfig {
-    private static final SimpleDateFormat date = new SimpleDateFormat("HH:mm:ss");
-
+//   Every day at midnight - 12am
     @Scheduled(cron = "0 0 0 * * ?")
     public void testScheduling() {
-        System.out.println("Current time = :" + date.format(new Date()));
-        AddressEndpoint addressEndpoint = new AddressEndpoint();
-        addressEndpoint.getCities();
+        TransactionEndpoint transactionEndpoint = new TransactionEndpoint();
+        transactionEndpoint.checkExpiration();
 
     }
 

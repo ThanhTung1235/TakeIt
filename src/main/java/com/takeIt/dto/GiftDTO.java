@@ -9,12 +9,12 @@ public class GiftDTO {
     private String name;
     private String description;
     private String gender;
-    private String age_range;
+    private String ageRange;
     private String accountName;
     private long accountId;
     private String cityName;
     private String districtName;
-    private String street_name;
+    private String streetName;
     private String categoryName;
     private String createdAt;
     private String updatedAt;
@@ -29,7 +29,7 @@ public class GiftDTO {
         this.gender = gift.getGender() == 1 ? "Boy" : "Girl";
         this.cityName = gift.getCity().getName();
         this.districtName = gift.getDistrict().getName();
-        this.street_name = gift.getStreet_name();
+        this.streetName = gift.getStreet_name();
         this.accountId = gift.getAccount().getId();
         this.accountName = gift.getAccount().getUsername();
         this.categoryName = gift.getCategory().getName();
@@ -79,12 +79,12 @@ public class GiftDTO {
         this.gender = gender;
     }
 
-    public String getAge_range() {
-        return age_range;
+    public String getAgeRange() {
+        return ageRange;
     }
 
-    public void setAge_range(String age_range) {
-        this.age_range = age_range;
+    public void setAgeRange(String ageRange) {
+        this.ageRange = ageRange;
     }
 
     public String getAccountName() {
@@ -111,12 +111,12 @@ public class GiftDTO {
         this.districtName = districtName;
     }
 
-    public String getStreet_name() {
-        return street_name;
+    public String getStreetName() {
+        return streetName;
     }
 
-    public void setStreet_name(String street_name) {
-        this.street_name = street_name;
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
     }
 
     public String getCategoryName() {

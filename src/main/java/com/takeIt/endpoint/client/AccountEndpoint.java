@@ -1,5 +1,6 @@
 package com.takeIt.endpoint.client;
 
+import com.google.gson.Gson;
 import com.takeIt.dto.AccountDTO;
 import com.takeIt.dto.AccountInfoDTO;
 import com.takeIt.dto.context.AccountInfoContext;
@@ -74,38 +75,31 @@ public class AccountEndpoint {
 
 
     @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public ResponseEntity<Object> storeAccount(@RequestBody AccountInfoContext accountInfoContext){
-        AccountDTO accountDTO = accountInfoContext.getAccountDTO();
-        AccountInfoDTO accountInfoDTO = accountInfoContext.getAccountInfoDTO();
-
+    public ResponseEntity<Object> storeAccount(@RequestBody AccountInfoContext accountInfoContext) {
+        System.out.println(new Gson().toJson(accountInfoContext));
         Account account = new Account();
-        account.setUsername(accountDTO.getUsername());
-        account.setPassword(BCrypt.hashpw(accountDTO.getPassword(), BCrypt.gensalt()));
-        account.setRole(Account.Roles.MEMBER);
-        account.setStatus(Account.Status.ACTIVE);
+        account.setUsername(accountInfoContext.getUsername());
+        account.setPassword(BCrypt.hashpw(accountInfoContext.getPassword(), BCrypt.gensalt()));
+        Account a = accountService.register(account, accountInfoContext);
 
-        AccountInfo accountInfo = new AccountInfo();
-        accountInfo.setFirstName(accountInfoDTO.getFirstName());
-        accountInfo.setLastName(accountInfoDTO.getLastName());
-        accountInfo.setEmail(accountInfoDTO.getEmail());
-        accountInfo.setDob(accountInfoDTO.getDob());
-        accountInfo.setAccount(account);
-        return new ResponseEntity<>(new AccountInfoContext(
-                new AccountDTO(accountService.register(account)),
-                new AccountInfoDTO(accountInfoService.store(accountInfo))),
-                HttpStatus.CREATED);
+
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setStatus(HttpStatus.OK.value())
+                .setMessage("Register success!")
+                .addData(new AccountDTO(account)).build(), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<Object> login(@RequestParam String username, @RequestParam String password){
+    public ResponseEntity<Object> login(@RequestParam String username, @RequestParam String password) {
         Account account = accountService.login(username, password);
-        if (account == null){
+        if (account == null) {
             return null;
         }
-        AccountInfo accountInfo = accountInfoService.findByAccountId(account.getId());
-        return new ResponseEntity<>(new AccountInfoContext(
-                new AccountDTO(account),
-                new AccountInfoDTO(accountInfo)),
-                HttpStatus.OK);
+//        AccountInfo accountInfo = accountInfoService.findByAccountId(account.getId());
+//        return new ResponseEntity<>(new AccountInfoContext(
+//                new AccountDTO(account),
+//                new AccountInfoDTO(accountInfo)),
+//                HttpStatus.OK);
+        return null;
     }
 }

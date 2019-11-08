@@ -1,7 +1,9 @@
 package com.takeIt.endpoint.client;
 
 import com.google.gson.Gson;
+import com.takeIt.dto.CategoryDTO;
 import com.takeIt.dto.GiftDTO;
+import com.takeIt.entity.Category;
 import com.takeIt.entity.Gift;
 import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
@@ -18,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @CrossOrigin
@@ -128,5 +131,18 @@ public class GiftEndpoint {
                     .setMessage("Delete fail!")
                     .build(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/categories")
+    public ResponseEntity<Object> getCate(
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit
+    ) {
+        Page<Category> categories = categoryService.categories(page, limit);
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setMessage("")
+                .setPagination(new RESTPagination(page, limit, categories.getTotalPages(), categories.getTotalElements()))
+                .addData(categories.getContent().stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList()))
+                .setStatus(HttpStatus.OK.value()).build(), HttpStatus.OK);
     }
 }

@@ -1,6 +1,10 @@
 package com.takeIt.service.account;
 
+import com.google.gson.Gson;
+import com.takeIt.dto.context.AccountInfoContext;
 import com.takeIt.entity.Account;
+import com.takeIt.entity.AccountInfo;
+import com.takeIt.repository.AccountInfoRepository;
 import com.takeIt.repository.AccountRepository;
 import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
@@ -17,6 +21,8 @@ import java.util.Optional;
 public class AccountServiceImpl implements AccountService {
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    AccountInfoRepository infoRepository;
 
     @Override
     public Account getAccount(long id) {
@@ -28,15 +34,24 @@ public class AccountServiceImpl implements AccountService {
         Optional<Account> optionalAccount = accountRepository.findAccountByUsername(username);
         if (BCrypt.checkpw(password, optionalAccount.get().getPassword())) {
             return optionalAccount.orElse(null);
-        }else {
+        } else {
             return null;
 
         }
     }
 
     @Override
-    public Account register(Account account) {
-        return accountRepository.save(account);
+    public Account register(Account account, AccountInfoContext accountInfoContext) {
+        Account a = accountRepository.save(account);
+        AccountInfo accountInfo = new AccountInfo();
+        accountInfo.setFirstName(accountInfoContext.getFirstname());
+        accountInfo.setLastName(accountInfoContext.getLastname());
+        accountInfo.setAvatar(accountInfoContext.getAvatar());
+        accountInfo.setDob(accountInfoContext.getDob());
+        accountInfo.setAccount(account);
+        System.out.println(new Gson().toJson(accountInfo));
+        infoRepository.save(accountInfo);
+        return a;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class City {
     private long id;
     private String name;
     private String type;
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "city", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Set<Gift> gifts;
     @OneToMany(mappedBy = "city", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Set<District> districts;

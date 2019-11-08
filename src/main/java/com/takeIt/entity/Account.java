@@ -9,16 +9,15 @@ import java.util.Set;
 @Entity
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(unique = true)
     private String username;
     private String password;
     private long createdAt;
     private long updatedAt;
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private AccountInfo accountInfo;
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Gift> gifts;
     private int status;
     private int role;
@@ -26,6 +25,9 @@ public class Account {
     public Account() {
         this.createdAt = Calendar.getInstance().getTimeInMillis();
         this.updatedAt = Calendar.getInstance().getTimeInMillis();
+        this.status = Status.ACTIVE.getValue();
+        this.role = Roles.MEMBER.getValue();
+        this.id = Calendar.getInstance().getTimeInMillis();
     }
 
     public long getId() {

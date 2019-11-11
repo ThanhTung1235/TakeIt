@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/_api/admin/account")
-public class accountAdminEndpoint {
+public class AccountAdminEndpoint {
     @Autowired
     AccountService accountService;
 

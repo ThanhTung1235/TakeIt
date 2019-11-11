@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/_api/admin/product")
-public class giftAdminEndpoint {
+public class GiftAdminEndpoint {
     @Autowired
     GiftService giftService;
 

@@ -15,6 +15,8 @@ public interface GiftService {
 
     Page<Gift> getGiftByCategoryId(long id, int status, int page, int limit);
 
+    Gift updateStatusGift(long id, boolean status);
+
     Gift getProduct(long id);
 
     boolean delete(long id);

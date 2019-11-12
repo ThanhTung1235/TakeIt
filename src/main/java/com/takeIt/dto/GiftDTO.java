@@ -20,6 +20,15 @@ public class GiftDTO {
     private String updatedAt;
     private String deletedAt;
     private String email;
+    private String thumbnail;
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
+    }
 
     public GiftDTO(Gift gift) {
         ObjectUtil.cloneObject(this, gift);

@@ -22,14 +22,6 @@ public class GiftDTO {
     private String email;
     private String thumbnail;
 
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     public GiftDTO(Gift gift) {
         ObjectUtil.cloneObject(this, gift);
         this.id = gift.getId();
@@ -43,6 +35,7 @@ public class GiftDTO {
         this.accountName = gift.getAccount().getUsername();
         this.categoryName = gift.getCategory().getName();
         this.email = gift.getAccount().getAccountInfo().getEmail();
+        this.thumbnail = gift.getThumbnail();
         this.createdAt = DateTimeUtil.formatDateFromLong(gift.getCreatedAt());
         this.updatedAt = DateTimeUtil.formatDateFromLong(gift.getUpdatedAt());
         this.deletedAt = DateTimeUtil.formatDateFromLong(gift.getDeletedAt());
@@ -166,5 +159,13 @@ public class GiftDTO {
 
     public void setAccountId(long accountId) {
         this.accountId = accountId;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

@@ -1,6 +1,5 @@
 package com.takeIt.entity;
 
-
 import javax.persistence.*;
 import java.util.Set;
 

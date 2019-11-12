@@ -1,7 +1,6 @@
 package com.takeIt.endpoint.admin;
 
 import com.takeIt.dto.GiftDTO;
-import com.takeIt.entity.Account;
 import com.takeIt.entity.Gift;
 import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;

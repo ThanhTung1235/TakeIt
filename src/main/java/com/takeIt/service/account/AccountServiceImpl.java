@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.Optional;
 
 @Service
@@ -69,5 +70,17 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findByAccountInfo_IdAndStatus(id, status, PageRequest.of(page - 1, limit));
     }
 
+    @Override
+    public boolean delete(long id) {
+        Optional<Account> p = accountRepository.findById(id);
+        if (p.isPresent()) {
+            Account g = p.get();
+            g.setStatus(Account.Status.DELETE);
+//            g.setDeletedAt(Calendar.getInstance().getTimeInMillis());
+            accountRepository.save(g);
+            return true;
+        }
+        return false;
+    }
 
 }

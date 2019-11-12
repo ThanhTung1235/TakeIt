@@ -52,6 +52,22 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
+    public Gift updateStatusGift(long id, boolean status) {
+        Optional<Gift> optional = giftRepository.findById(id);
+        if (optional.isPresent()){
+            Gift gift = optional.get();
+            if (status){
+                gift.setStatus(Gift.Status.ACTIVE);
+                giftRepository.save(gift);
+            }else {
+                gift.setStatus(Gift.Status.DELETED);
+                giftRepository.save(gift);
+            }
+        }
+        return null;
+    }
+
+    @Override
     public Gift getProduct(long id) {
         return giftRepository.findById(id).orElse(null);
     }

@@ -17,4 +17,6 @@ public interface AccountService {
     Page<Account> accountWithPaginate(Specification specification, int page, int limit);
 
     Page<Account> getAccountByAccountInfoId(long id, int status, int page, int limit);
+
+    boolean delete(long id);
 }

@@ -52,14 +52,20 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
+    public Page<Gift> getGiftByGender(int gender, int page, int limit) {
+        return giftRepository.findByGenderAndStatus(gender, 1, PageRequest.of(page - 1, limit));
+    }
+
+
+    @Override
     public Gift updateStatusGift(long id, boolean status) {
         Optional<Gift> optional = giftRepository.findById(id);
-        if (optional.isPresent()){
+        if (optional.isPresent()) {
             Gift gift = optional.get();
-            if (status){
+            if (status) {
                 gift.setStatus(Gift.Status.ACTIVE);
                 giftRepository.save(gift);
-            }else {
+            } else {
                 gift.setStatus(Gift.Status.DELETED);
                 giftRepository.save(gift);
             }
@@ -69,7 +75,7 @@ public class GiftServiceImpl implements GiftService {
 
     @Override
     public Gift getProduct(long id) {
-        return giftRepository.findById(id).orElse(null);
+        return giftRepository.findByIdAndStatus(id, Gift.Status.ACTIVE.getValue()).orElse(null);
     }
 
     @Override

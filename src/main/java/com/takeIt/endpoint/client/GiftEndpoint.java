@@ -36,6 +36,7 @@ public class GiftEndpoint {
     @Autowired
     AddressService addressService;
 
+    //get all or search gift by name
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Object> search(
             @RequestParam(value = "keyword", required = false) String keyword,
@@ -44,9 +45,7 @@ public class GiftEndpoint {
         Specification specification = Specification.where(null);
         if (keyword != null && keyword.length() > 0) {
             specification = specification
-                    .and(new GiftSpecification(new SearchCriteria("name", ":", keyword)))
-                    .or(new GiftSpecification(new SearchCriteria("description", ":", keyword)))
-                    .or(new GiftSpecification(new SearchCriteria("street_name", ":", keyword)));
+                    .and(new GiftSpecification(new SearchCriteria("name", ":", keyword)));
         }
 
         Page<Gift> giftPage = giftService.giftssWithPaginate(specification, page, limit);
@@ -58,13 +57,13 @@ public class GiftEndpoint {
                 .build(), HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/cate/{id}")
+    //    get gift by cateId
+    @RequestMapping(method = RequestMethod.GET, value = "/cate")
     public ResponseEntity<Object> searchCate(
-            @PathVariable long id,
+            @RequestParam(value = "id", required = false) long id,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
         Page<Gift> giftPage = giftService.getGiftByCategoryId(id, 0, page, limit);
-        System.out.println("Cate id:" + new Gson().toJson(giftPage.getContent().size()));
         return new ResponseEntity<>(new RESTResponse.Success()
                 .setStatus(HttpStatus.OK.value())
                 .setPagination(new RESTPagination(page, limit, giftPage.getTotalPages(), giftPage.getTotalElements()))
@@ -73,6 +72,7 @@ public class GiftEndpoint {
                 .build(), HttpStatus.OK);
     }
 
+    // create gift
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     public ResponseEntity<Object> saveProduct(@RequestBody Gift gift) {
         System.out.println(new Gson().toJson(gift));
@@ -83,6 +83,7 @@ public class GiftEndpoint {
                 .addData(gift).build(), HttpStatus.CREATED);
     }
 
+    // update gift
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
     public ResponseEntity<Object> updateProduct(@PathVariable long id, @RequestBody Gift gift) {
         Gift p = giftService.getProduct(id);
@@ -99,6 +100,7 @@ public class GiftEndpoint {
 
     }
 
+    // getDetail gift
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Object> getProduct(@PathVariable long id) {
         Gift gift = giftService.getProduct(id);
@@ -117,6 +119,7 @@ public class GiftEndpoint {
                     HttpStatus.OK);
     }
 
+    // delete gift
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Object> delete(@PathVariable long id) {
         if (giftService.delete(id))
@@ -133,6 +136,7 @@ public class GiftEndpoint {
                     HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    // get gift by gender " _api/products/gender?id=1"
     @RequestMapping(method = RequestMethod.GET, value = "/categories")
     public ResponseEntity<Object> getCate(
             @RequestParam(defaultValue = "1", required = false) int page,
@@ -143,6 +147,21 @@ public class GiftEndpoint {
                 .setMessage("")
                 .setPagination(new RESTPagination(page, limit, categories.getTotalPages(), categories.getTotalElements()))
                 .addData(categories.getContent().stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList()))
+                .setStatus(HttpStatus.OK.value()).build(), HttpStatus.OK);
+    }
+
+    // get gift by gender " _api/products/gender?id=1"
+    @RequestMapping(method = RequestMethod.GET, value = "/gender")
+    public ResponseEntity<Object> getGiftByGender(
+            @RequestParam(value = "id", required = false) int gender,
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit
+    ) {
+        Page<Gift> gifts = giftService.getGiftByGender(gender, page, limit);
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setMessage("")
+                .setPagination(new RESTPagination(page, limit, gifts.getTotalPages(), gifts.getTotalElements()))
+                .addData(gifts.getContent().stream().map(x -> new GiftDTO(x)).collect(Collectors.toList()))
                 .setStatus(HttpStatus.OK.value()).build(), HttpStatus.OK);
     }
 }

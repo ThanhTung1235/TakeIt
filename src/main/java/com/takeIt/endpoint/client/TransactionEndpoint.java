@@ -42,7 +42,7 @@ public class TransactionEndpoint {
 
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Object> search(
+    public ResponseEntity<Object> getAllTransaction(
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
         try {
@@ -61,7 +61,9 @@ public class TransactionEndpoint {
         }
 
     }
-    //http://localhost:8080/_api/transactions/transactionConfirm
+
+
+    //http://localhost:8080/_api/transactions/transactionConfirm "cron job 12am"
     @RequestMapping(method = RequestMethod.GET, value = "/transactionConfirm")
     public ResponseEntity<Object> checkExpiration() {
         try {

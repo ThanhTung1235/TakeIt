@@ -19,11 +19,29 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/_api/admin/product")
+@RequestMapping(value = "/_api/admin/products")
 public class GiftAdminEndpoint {
     @Autowired
     GiftService giftService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Object> search(
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit) {
+        Specification specification = Specification.where(null);
+        if (keyword != null && keyword.length() > 0) {
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("name", ":", keyword)));
+        }
+        Page<Gift> giftPage = giftService.giftssWithPaginate(specification, page, limit);
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setStatus(HttpStatus.OK.value())
+                .setPagination(new RESTPagination(page, limit, giftPage.getTotalPages(), giftPage.getTotalElements()))
+                .addData(giftPage.getContent().stream().map(x -> new GiftDTO(x)).collect(Collectors.toList()))
+                .setMessage(" ")
+                .build(), HttpStatus.OK);
+    }
 
     //Sửa Gift
     @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
@@ -57,7 +75,7 @@ public class GiftAdminEndpoint {
                     HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    //Confirm the gift by status
+    //Confirm the gift by status ""
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Object> confirmGift(
             @PathVariable long id,
@@ -75,49 +93,5 @@ public class GiftAdminEndpoint {
         }
 
     }
-
-
-//    //Search
-//    @RequestMapping(method = RequestMethod.GET)
-//    public ResponseEntity<Object> search(
-//            @RequestParam(value = "keyword", required = false) String keyword,
-//            @RequestParam(defaultValue = "1", required = false) int page,
-//            @RequestParam(defaultValue = "10", required = false) int limit) {
-//        Specification specification = Specification.where(null);
-//        if (keyword != null && keyword.length() > 0) {
-//            specification = specification
-//                    .and(new GiftSpecification(new SearchCriteria("name", ":", keyword)))
-//                    .or(new GiftSpecification(new SearchCriteria("description", ":", keyword)))
-//                    .or(new GiftSpecification(new SearchCriteria("street_name", ":", keyword)));
-//        }
-//
-//        Page<Gift> giftPage = giftService.giftssWithPaginate(specification, page, limit);
-//        return new ResponseEntity<>(new RESTResponse.Success()
-//                .setStatus(HttpStatus.OK.value())
-//                .setPagination(new RESTPagination(page, limit, giftPage.getTotalPages(), giftPage.getTotalElements()))
-//                .addData(giftPage.getContent().stream().map(x -> new GiftDTO(x)).collect(Collectors.toList()))
-//                .setMessage("")
-//                .build(), HttpStatus.OK);
-//    }
-//
-//    //Get product
-//    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-//    public ResponseEntity<Object> getProduct(@PathVariable long id) {
-//        Gift gift = giftService.getProduct(id);
-//        if (gift == null)
-//            return new ResponseEntity<>(new RESTResponse.SimpleError()
-//                    .setCode(HttpStatus.NOT_FOUND.value())
-//                    .setMessage("Product not found")
-//                    .build(),
-//                    HttpStatus.NOT_FOUND);
-//        else
-//            return new ResponseEntity<>(new RESTResponse.Success()
-//                    .setStatus(HttpStatus.OK.value())
-//                    .setMessage("Success")
-//                    .addData(new GiftDTO(gift))
-//                    .build(),
-//                    HttpStatus.OK);
-//    }
-
 
 }

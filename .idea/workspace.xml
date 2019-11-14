@@ -8,10 +8,31 @@
   <component name="ChangeListManager">
     <list default="true" id="e65209ee-56e3-41ec-a9ab-a72982a07ba3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/config/SpringConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/config/SpringConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/dto/GiftDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/admin/AccountAdminEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/admin/AccountAdminEndpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/admin/GiftAdminEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/admin/GiftAdminEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/AccountEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/AccountEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/GiftEndpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/endpoint/client/GiftEndpoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Account.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/entity/Gift.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/AccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/repository/AccountRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/takeIt/service/account/AccountServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/config/SpringConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/config/SpringConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/dto/GiftDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/endpoint/client/AccountEndpoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/endpoint/client/AccountEndpoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/endpoint/client/GiftEndpoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/endpoint/client/GiftEndpoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/endpoint/client/TransactionEndpoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/endpoint/client/TransactionEndpoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Roles.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Age_range.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Age_range.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Gender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Gender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/entity/Gift.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/repository/AccountRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/repository/AccountRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/takeIt/service/account/AccountServiceImpl.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,12 +68,6 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="56" />
-    <option name="y" value="6" />
-    <option name="width" value="1258" />
-    <option name="height" value="720" />
-  </component>
   <component name="ProjectId" id="1SUwhMVtIYL2rIuLNc4Hcx6wsu6" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -65,7 +80,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/takeIt/config" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -89,6 +104,7 @@
       <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\java\com\takeIt\config" />
       <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\java\com\takeIt\service\category" />
       <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\java\com\takeIt\service\account" />
       <recent name="C:\Users\Le Thanh Tung\Desktop\test\TakeIt\src\main\resources" />
@@ -107,6 +123,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.TakeItApplication (1)">
+    <configuration name="Credential" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.takeIt.entity.Credential" />
+      <module name="TakeIt" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.takeIt.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ExchangeRequest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.takeIt.entity.ExchangeRequest" />
       <module name="TakeIt" />
@@ -162,6 +191,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Credential" />
         <item itemvalue="Application.SpringConfig" />
         <item itemvalue="Spring Boot.TakeItApplication" />
         <item itemvalue="Application.ExchangeRequest" />
@@ -214,6 +244,17 @@
       <workItem from="1573025989035" duration="743000" />
       <workItem from="1573434068795" duration="12044000" />
       <workItem from="1573476253751" duration="272000" />
+      <workItem from="1573577604349" duration="790000" />
+      <workItem from="1573607194823" duration="1716000" />
+      <workItem from="1573612439961" duration="81000" />
+      <workItem from="1573612815153" duration="639000" />
+      <workItem from="1573628383980" duration="7594000" />
+      <workItem from="1573662808884" duration="226000" />
+      <workItem from="1573671414952" duration="294000" />
+      <workItem from="1573699697577" duration="2754000" />
+      <workItem from="1573702789472" duration="4349000" />
+      <workItem from="1573716355594" duration="1135000" />
+      <workItem from="1573718066864" duration="6904000" />
     </task>
     <servers />
   </component>

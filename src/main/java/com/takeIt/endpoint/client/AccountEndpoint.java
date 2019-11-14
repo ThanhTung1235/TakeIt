@@ -3,9 +3,11 @@ package com.takeIt.endpoint.client;
 import com.google.gson.Gson;
 import com.takeIt.dto.AccountDTO;
 import com.takeIt.dto.AccountInfoDTO;
+import com.takeIt.dto.CredentialDTO;
 import com.takeIt.dto.context.AccountInfoContext;
 import com.takeIt.entity.Account;
 import com.takeIt.entity.AccountInfo;
+import com.takeIt.entity.Credential;
 import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.account.AccountService;
@@ -23,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/_api/v1")
+@RequestMapping(value = "/_api/account")
 public class AccountEndpoint {
     @Autowired
     AccountService accountService;
@@ -74,32 +76,33 @@ public class AccountEndpoint {
     }
 
 
-    @RequestMapping(value = "/account", method = RequestMethod.POST)
-    public ResponseEntity<Object> storeAccount(@RequestBody AccountInfoContext accountInfoContext) {
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Object> register(@RequestBody AccountInfoContext accountInfoContext) {
         System.out.println(new Gson().toJson(accountInfoContext));
         Account account = new Account();
         account.setUsername(accountInfoContext.getUsername());
         account.setPassword(BCrypt.hashpw(accountInfoContext.getPassword(), BCrypt.gensalt()));
         Account a = accountService.register(account, accountInfoContext);
 
-
         return new ResponseEntity<>(new RESTResponse.Success()
                 .setStatus(HttpStatus.OK.value())
                 .setMessage("Register success!")
-                .addData(new AccountDTO(account)).build(), HttpStatus.CREATED);
+                .addData(new AccountDTO(a)).build(), HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ResponseEntity<Object> login(@RequestParam String username, @RequestParam String password) {
-        Account account = accountService.login(username, password);
-        if (account == null) {
-            return null;
+        Credential credential = accountService.login(username, password);
+        if (credential == null) {
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setMessage("Token not found")
+                    .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .build(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-//        AccountInfo accountInfo = accountInfoService.findByAccountId(account.getId());
-//        return new ResponseEntity<>(new AccountInfoContext(
-//                new AccountDTO(account),
-//                new AccountInfoDTO(accountInfo)),
-//                HttpStatus.OK);
-        return null;
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setMessage("Welcome")
+                .setStatus(HttpStatus.OK.value())
+                .addData(new CredentialDTO(credential))
+                .build(), HttpStatus.OK);
     }
 }

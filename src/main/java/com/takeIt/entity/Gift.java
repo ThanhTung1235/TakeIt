@@ -29,7 +29,8 @@ public class Gift {
     private City city;
     @ManyToOne(cascade = CascadeType.ALL)
     private District district;
-    private String thumbnail;
+    @Column(columnDefinition = "TEXT")
+    private String thumbnails;
     private long createdAt;
     private long updatedAt;
     private long deletedAt;
@@ -236,11 +237,11 @@ public class Gift {
         this.exchangeRequest = exchangeRequest;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getThumbnails() {
+        return thumbnails;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumbnails(String thumbnails) {
+        this.thumbnails = thumbnails;
     }
 }

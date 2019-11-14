@@ -2,13 +2,15 @@ package com.takeIt.service.account;
 
 import com.takeIt.dto.context.AccountInfoContext;
 import com.takeIt.entity.Account;
+import com.takeIt.entity.Credential;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.userdetails.User;
 
 public interface AccountService {
     Account getAccount(long id);
 
-    Account login(String username, String password);
+    Credential login(String username, String password);
 
     Account register(Account account, AccountInfoContext accountInfoContext);
 

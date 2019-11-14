@@ -7,11 +7,10 @@ import com.takeIt.entity.Account;
 import com.takeIt.entity.Category;
 import com.takeIt.entity.City;
 import org.apache.catalina.LifecycleState;
-import org.apache.commons.collections.ListUtils;
-import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.ListUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,20 +34,4 @@ public class SpringConfig {
 
     }
 
-    public static void main(String[] args) throws ParseException {
-        Category category = new Category();
-        category.setId(1);
-        category.setName("some name");
-        List<Category> categories = new ArrayList<>();
-        categories.add(category);
-
-        City city = new City();
-        city.setId(1);
-        city.setName("Ha Noi");
-        List<City> cities = new ArrayList<>();
-        cities.add(city);
-        System.out.println(new Gson().toJson(ListUtils.union(categories, cities)));;
-
-
-    }
 }

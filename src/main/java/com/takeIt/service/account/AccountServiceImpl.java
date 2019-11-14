@@ -4,8 +4,10 @@ import com.google.gson.Gson;
 import com.takeIt.dto.context.AccountInfoContext;
 import com.takeIt.entity.Account;
 import com.takeIt.entity.AccountInfo;
+import com.takeIt.entity.Credential;
 import com.takeIt.repository.AccountInfoRepository;
 import com.takeIt.repository.AccountRepository;
+import com.takeIt.repository.CredentialRepository;
 import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
 import org.mindrot.jbcrypt.BCrypt;
@@ -13,10 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountService {
@@ -24,6 +29,8 @@ public class AccountServiceImpl implements AccountService {
     AccountRepository accountRepository;
     @Autowired
     AccountInfoRepository infoRepository;
+    @Autowired
+    CredentialRepository credentialRepository;
 
     @Override
     public Account getAccount(long id) {
@@ -31,14 +38,19 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account login(String username, String password) {
-        Optional<Account> optionalAccount = accountRepository.findAccountByUsername(username);
-        if (BCrypt.checkpw(password, optionalAccount.get().getPassword())) {
-            return optionalAccount.orElse(null);
-        } else {
-            return null;
+    public Credential login(String username, String password) {
+        Optional<Account> optionalAccount = accountRepository.findByUsernameAndPassword(username, password);
+        if (optionalAccount.isPresent()) {
+            String token = UUID.randomUUID().toString();
+            Account account = optionalAccount.get();
 
+            Credential credential = new Credential();
+            credential.setAccessToken(token);
+            credential.setAccount(account);
+            credentialRepository.save(credential);
+            return credential;
         }
+        return null;
     }
 
     @Override

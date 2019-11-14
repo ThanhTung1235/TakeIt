@@ -13,14 +13,17 @@ public class Account {
     @Column(unique = true)
     private String username;
     private String password;
-    private long createdAt;
-    private long updatedAt;
     @OneToOne(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private AccountInfo accountInfo;
     @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Gift> gifts;
+    @OneToMany(mappedBy = "account", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    private Set<Credential> credential;
     private int status;
     private int role;
+    private long deletedAt;
+    private long createdAt;
+    private long updatedAt;
 
     public Account() {
         this.createdAt = Calendar.getInstance().getTimeInMillis();
@@ -68,6 +71,14 @@ public class Account {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public Set<Credential> getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Set<Credential> credential) {
+        this.credential = credential;
     }
 
     public int getStatus() {

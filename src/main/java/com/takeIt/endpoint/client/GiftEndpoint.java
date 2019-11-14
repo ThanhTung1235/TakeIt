@@ -37,7 +37,7 @@ public class GiftEndpoint {
     AddressService addressService;
 
     //get all or search gift by name
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public ResponseEntity<Object> search(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(defaultValue = "1", required = false) int page,

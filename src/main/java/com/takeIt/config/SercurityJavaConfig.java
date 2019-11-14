@@ -19,7 +19,7 @@ public class SercurityJavaConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthenticationProvider provider;
 
-    private static final String PROTECTED_URLS = "/_api/**";
+    private static final String PROTECTED_URLS = "/_api/simple/**";
 
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) {
@@ -33,7 +33,7 @@ public class SercurityJavaConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/_api/account/login").permitAll()
                 .antMatchers("/_api/account/register").permitAll()
-                .antMatchers("/api/public").permitAll();
+                .antMatchers("/_api/public").permitAll();
     }
 
     @Bean

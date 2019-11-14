@@ -27,7 +27,7 @@ public class GiftDTO {
         this.id = gift.getId();
         this.name = gift.getName();
         this.description = gift.getDescription();
-        this.gender = gift.getGender() == 1 ? "Nam" : "Nữ";
+        this.gender = gift.getGender() == 1 ? "Trai" : "Gái";
         this.cityName = gift.getCity().getName();
         this.districtName = gift.getDistrict().getName();
         this.streetName = gift.getStreet_name();

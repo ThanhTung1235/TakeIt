@@ -53,19 +53,6 @@ public class AccountServiceImpl implements AccountService {
         return null;
     }
 
-    @Override
-    public Account register(Account account, AccountInfoContext accountInfoContext) {
-        Account a = accountRepository.save(account);
-        AccountInfo accountInfo = new AccountInfo();
-        accountInfo.setFirstName(accountInfoContext.getFirstname());
-        accountInfo.setLastName(accountInfoContext.getLastname());
-        accountInfo.setAvatar(accountInfoContext.getAvatar());
-        accountInfo.setDob(accountInfoContext.getDob());
-        accountInfo.setAccount(account);
-        System.out.println(new Gson().toJson(accountInfo));
-        infoRepository.save(accountInfo);
-        return a;
-    }
 
     @Override
     public Account findByAccountId(long id) {

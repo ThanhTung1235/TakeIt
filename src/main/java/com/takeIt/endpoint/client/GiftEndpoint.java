@@ -37,12 +37,28 @@ public class GiftEndpoint {
     AddressService addressService;
 
     //get all or search gift by name
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public ResponseEntity<Object> search(
             @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "city", required = false) String cityName,
+            @RequestParam(value = "district", required = false) String districtName,
+            @RequestParam(value = "cate", required = false) String cateName,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
         Specification specification = Specification.where(null);
+        if (cityName != null && cityName.length() > 0) {
+            System.out.println("cityName: "+cityName);
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("city", "join", cityName)));
+        }
+        if (districtName != null && districtName.length() > 0) {
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("district", "join", districtName)));
+        }
+        if (cateName != null && cateName.length() > 0) {
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("cate", "join", cateName)));
+        }
         if (keyword != null && keyword.length() > 0) {
             specification = specification
                     .and(new GiftSpecification(new SearchCriteria("name", ":", keyword)));
@@ -57,7 +73,9 @@ public class GiftEndpoint {
                 .build(), HttpStatus.OK);
     }
 
-    //    get gift by cateId
+
+
+    // get gift by cateId
     @RequestMapping(method = RequestMethod.GET, value = "/cate")
     public ResponseEntity<Object> searchCate(
             @RequestParam(value = "id", required = false) long id,

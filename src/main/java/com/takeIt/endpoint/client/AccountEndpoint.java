@@ -33,7 +33,7 @@ public class AccountEndpoint {
     @Autowired
     AccountInfoService accountInfoService;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/_api/account", method = RequestMethod.GET)
     public ResponseEntity<Object> getList(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "from", required = false) String from,
@@ -82,12 +82,12 @@ public class AccountEndpoint {
         Account account = new Account();
         account.setUsername(accountInfoContext.getUsername());
         account.setPassword(BCrypt.hashpw(accountInfoContext.getPassword(), BCrypt.gensalt()));
-        Account a = accountService.register(account, accountInfoContext);
+//        Account a = accountService.register(account, accountInfoContext);
 
         return new ResponseEntity<>(new RESTResponse.Success()
                 .setStatus(HttpStatus.OK.value())
                 .setMessage("Register success!")
-                .addData(new AccountDTO(a)).build(), HttpStatus.CREATED);
+                .addData(new AccountDTO(null)).build(), HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -102,7 +102,6 @@ public class AccountEndpoint {
         return new ResponseEntity<>(new RESTResponse.Success()
                 .setMessage("Welcome")
                 .setStatus(HttpStatus.OK.value())
-                .addData(new CredentialDTO(credential))
-                .build(), HttpStatus.OK);
+                .addData(new CredentialDTO(credential)).build(), HttpStatus.OK);
     }
 }

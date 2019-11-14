@@ -12,8 +12,6 @@ public interface AccountService {
 
     Credential login(String username, String password);
 
-    Account register(Account account, AccountInfoContext accountInfoContext);
-
     Account findByAccountId(long id);
 
     Page<Account> accountWithPaginate(Specification specification, int page, int limit);

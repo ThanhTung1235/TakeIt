@@ -21,6 +21,7 @@ public class Account {
     private Set<Credential> credential;
     private int status;
     private int role;
+    private String salt;
     private long deletedAt;
     private long createdAt;
     private long updatedAt;
@@ -158,5 +159,13 @@ public class Account {
 
     public void setGifts(Set<Gift> gifts) {
         this.gifts = gifts;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.takeIt.dto.AccountDTO;
 import com.takeIt.dto.AccountInfoDTO;
 import com.takeIt.dto.CredentialDTO;
-import com.takeIt.dto.context.AccountInfoContext;
 import com.takeIt.entity.Account;
 import com.takeIt.entity.AccountInfo;
 import com.takeIt.entity.Credential;
@@ -14,24 +13,29 @@ import com.takeIt.service.account.AccountService;
 import com.takeIt.service.accountInfo.AccountInfoService;
 import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
+import com.takeIt.util.StringUtil;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/_api/account")
+@RequestMapping(value = "/account")
 public class AccountEndpoint {
     @Autowired
     AccountService accountService;
 
     @Autowired
     AccountInfoService accountInfoService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @RequestMapping(value = "/_api/account", method = RequestMethod.GET)
     public ResponseEntity<Object> getList(
@@ -76,18 +80,26 @@ public class AccountEndpoint {
     }
 
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> register(@RequestBody AccountInfoContext accountInfoContext) {
-        System.out.println(new Gson().toJson(accountInfoContext));
-        Account account = new Account();
-        account.setUsername(accountInfoContext.getUsername());
-        account.setPassword(BCrypt.hashpw(accountInfoContext.getPassword(), BCrypt.gensalt()));
-//        Account a = accountService.register(account, accountInfoContext);
+    @RequestMapping(method = RequestMethod.POST, value = "/register")
+    public ResponseEntity<Object> register(@RequestBody Account account) {
+        try {
+            String salt = StringUtil.generateSalt();
 
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setStatus(HttpStatus.OK.value())
-                .setMessage("Register success!")
-                .addData(new AccountDTO(null)).build(), HttpStatus.CREATED);
+            String hashPass = StringUtil.hashPassword(account.getPassword()) + salt;
+            account.setUsername(account.getUsername());
+            account.setPassword(hashPass);
+            account.setSalt(salt);
+            Account a = accountService.register(account);
+
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage("Register success!")
+                    .addData(new AccountDTO(a)).build(), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .setMessage("Some thing wrong!").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)

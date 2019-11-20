@@ -23,7 +23,6 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws AuthenticationException, IOException, ServletException {
-        System.out.println("Hello ha123.");
         String token = httpServletRequest.getHeader(AUTHORIZATION);
         if (token == null) {
             throw new AuthenticationCredentialsNotFoundException("Token not found!");

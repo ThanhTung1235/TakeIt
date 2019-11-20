@@ -1,6 +1,5 @@
 package com.takeIt.service.account;
 
-import com.takeIt.dto.context.AccountInfoContext;
 import com.takeIt.entity.Account;
 import com.takeIt.entity.Credential;
 import org.springframework.data.domain.Page;
@@ -13,6 +12,8 @@ public interface AccountService {
     Credential login(String username, String password);
 
     Account findByAccountId(long id);
+
+    Account register(Account account);
 
     Page<Account> accountWithPaginate(Specification specification, int page, int limit);
 

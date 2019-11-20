@@ -14,7 +14,7 @@ public class Gift {
     @Column(columnDefinition = "TEXT")
     private String description;
     private int gender;
-    private int age_range;
+    private int ageRange;
     private int status;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Account account;
@@ -87,7 +87,10 @@ public class Gift {
     }
 
     public enum Age_range {
-        BOY(1), GIRL(2), OTHER(0);
+        NEWBORN(1), // 0 => 6 tháng
+        INFANTS(2), // 6 => 12 tháng
+        BABY(3), // 1 => 3 tuổi
+        CHILD(4);  // > 4  tháng
         int value;
 
         Age_range(int value) {
@@ -125,8 +128,8 @@ public class Gift {
         return gender;
     }
 
-    public int getAge_range() {
-        return age_range;
+    public int getAgeRange() {
+        return ageRange;
     }
 
     public int getStatus() {
@@ -185,8 +188,8 @@ public class Gift {
         this.gender = gender;
     }
 
-    public void setAge_range(int age_range) {
-        this.age_range = age_range;
+    public void setAgeRange(int ageRange) {
+        this.ageRange = ageRange;
     }
 
     public void setStatus(Status status) {

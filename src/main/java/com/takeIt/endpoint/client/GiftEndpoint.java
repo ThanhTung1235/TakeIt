@@ -43,11 +43,23 @@ public class GiftEndpoint {
             @RequestParam(value = "city", required = false) String cityName,
             @RequestParam(value = "district", required = false) String districtName,
             @RequestParam(value = "cate", required = false) String cateName,
+            @RequestParam(defaultValue = "0", required = false) int gender,
+            @RequestParam(defaultValue = "0", required = false) int age,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
         Specification specification = Specification.where(null);
+        if (age > 0) {
+            System.out.println("ageRange :" + age);
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("ageRange", ":", age)));
+        }
+        if (gender > 0) {
+            System.out.println("Gender :" + gender);
+            specification = specification
+                    .and(new GiftSpecification(new SearchCriteria("gender", ":", gender)));
+        }
         if (cityName != null && cityName.length() > 0) {
-            System.out.println("cityName: "+cityName);
+            System.out.println("cityName: " + cityName);
             specification = specification
                     .and(new GiftSpecification(new SearchCriteria("city", "join", cityName)));
         }
@@ -72,7 +84,6 @@ public class GiftEndpoint {
                 .setMessage("")
                 .build(), HttpStatus.OK);
     }
-
 
 
     // get gift by cateId

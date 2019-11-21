@@ -57,7 +57,6 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
         if (account.getRole() == Account.Roles.MEMBER.getValue()) role = "MEMBER";
         if (account.getRole() == Account.Roles.ADMIN.getValue()) role = "ADMIN";
 
-        System.out.println("role: " + role);
         UserDetails userDetails = User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

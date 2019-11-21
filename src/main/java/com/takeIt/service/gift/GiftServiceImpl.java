@@ -42,20 +42,9 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
-    public Page<Gift> giftssWithPaginate(Specification specification, int page, int limit) {
+    public Page<Gift> giftsWithPaginatePublish(Specification specification, int page, int limit) {
         return giftRepository.findAll(specification, PageRequest.of(page - 1, limit));
     }
-
-    @Override
-    public Page<Gift> getGiftByCategoryId(long id, int status, int page, int limit) {
-        return giftRepository.findByCategory_IdAndStatus(id, status, PageRequest.of(page - 1, limit));
-    }
-
-    @Override
-    public Page<Gift> getGiftByGender(int gender, int page, int limit) {
-        return giftRepository.findByGenderAndStatus(gender, 1, PageRequest.of(page - 1, limit));
-    }
-
 
     @Override
     public Gift updateStatusGift(long id, boolean status) {

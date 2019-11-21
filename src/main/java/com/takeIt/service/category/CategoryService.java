@@ -9,5 +9,5 @@ import java.util.List;
 public interface CategoryService {
     Category getCategory(long id);
 
-    Page<Category> categories(int page, int limit);
+    List<Category> categories();
 }

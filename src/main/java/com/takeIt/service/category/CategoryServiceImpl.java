@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Page<Category> categories(int page, int limit) {
-        return categoryRepository.findAll(PageRequest.of(page - 1, limit));
+    public List<Category> categories() {
+        return categoryRepository.findAll();
     }
 }

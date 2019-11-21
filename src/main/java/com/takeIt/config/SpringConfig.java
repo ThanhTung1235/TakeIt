@@ -7,6 +7,8 @@ import com.takeIt.entity.Account;
 import com.takeIt.entity.Category;
 import com.takeIt.entity.City;
 import org.apache.catalina.LifecycleState;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -33,5 +35,4 @@ public class SpringConfig {
         transactionEndpoint.checkExpiration();
 
     }
-
 }

@@ -19,24 +19,15 @@ public class MyCORSFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        System.out.println("CORSFilter HTTP Request: " + request.getMethod());
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        // Authorize (allow) all domains to consume the content
-        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", "*");
-        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST, DELETE, Authorization");
-        ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "Authorization");
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
 
-
-        HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
-        // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
-        if (request.getMethod().equals("OPTIONS")) {
-            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-            return;
-        }
-
-        // pass the request along the filter chain
-        filterChain.doFilter(request, servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 
     @Override

@@ -30,7 +30,7 @@ public class Gift {
     @ManyToOne(cascade = CascadeType.ALL)
     private District district;
     @Column(columnDefinition = "TEXT")
-    private String thumbnails;
+    private String thumbnail;
     private long createdAt;
     private long updatedAt;
     private long deletedAt;
@@ -240,11 +240,11 @@ public class Gift {
         this.exchangeRequest = exchangeRequest;
     }
 
-    public String getThumbnails() {
-        return thumbnails;
+    public String getThumbnail() {
+        return thumbnail;
     }
 
-    public void setThumbnails(String thumbnails) {
-        this.thumbnails = thumbnails;
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/_api/address")
+@RequestMapping(value = "/api/address")
 public class AddressEndpoint {
     @Autowired
     AddressService addressService;

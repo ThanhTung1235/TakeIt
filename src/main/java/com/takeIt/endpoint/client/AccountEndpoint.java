@@ -93,7 +93,7 @@ public class AccountEndpoint {
             Account a = accountService.register(account);
 
             return new ResponseEntity<>(new RESTResponse.Success()
-                    .setStatus(HttpStatus.OK.value())
+                    .setStatus(HttpStatus.CREATED.value())
                     .setMessage("Register success!")
                     .addData(new AccountDTO(a)).build(), HttpStatus.CREATED);
         } catch (Exception e) {

@@ -103,9 +103,9 @@ public class AccountEndpoint {
         }
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ResponseEntity<Object> login(@RequestParam String username, @RequestParam String password) {
-        Credential credential = accountService.login(username, password);
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public ResponseEntity<Object> login(@RequestBody Account account) {
+        Credential credential = accountService.login(account.getUsername(), account.getPassword());
         if (credential == null) {
             return new ResponseEntity<>(new RESTResponse.SimpleError()
                     .setMessage("Token not found")

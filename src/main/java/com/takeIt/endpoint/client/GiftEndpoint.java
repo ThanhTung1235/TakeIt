@@ -45,7 +45,7 @@ public class GiftEndpoint {
             @RequestParam(defaultValue = "0", required = false) int gender,
             @RequestParam(defaultValue = "0", required = false) int age,
             @RequestParam(defaultValue = "1", required = false) int page,
-            @RequestParam(defaultValue = "10", required = false) int limit) {
+            @RequestParam(defaultValue = "9", required = false) int limit) {
         Specification specification = Specification.where(null);
         specification = specification
                 .and(new GiftSpecification(new SearchCriteria("status", ":", Gift.Status.ACTIVE.getValue())));

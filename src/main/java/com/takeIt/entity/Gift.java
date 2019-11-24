@@ -14,7 +14,7 @@ public class Gift {
     @Column(columnDefinition = "TEXT")
     private String description;
     private int gender;
-    private int ageRange;
+    private int age_range;
     private int status;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Account account;
@@ -25,9 +25,9 @@ public class Gift {
     @OneToMany(mappedBy = "gift", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Set<ExchangeRequest> exchangeRequest;
     private String street_name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private City city;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private District district;
     @Column(columnDefinition = "TEXT")
     private String thumbnail;
@@ -128,8 +128,8 @@ public class Gift {
         return gender;
     }
 
-    public int getAgeRange() {
-        return ageRange;
+    public int getAge_range() {
+        return age_range;
     }
 
     public int getStatus() {
@@ -188,8 +188,8 @@ public class Gift {
         this.gender = gender;
     }
 
-    public void setAgeRange(int ageRange) {
-        this.ageRange = ageRange;
+    public void setAge_range(int age_range) {
+        this.age_range = age_range;
     }
 
     public void setStatus(Status status) {

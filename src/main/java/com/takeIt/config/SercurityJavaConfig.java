@@ -31,13 +31,13 @@ public class SercurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable();
         http.antMatcher(PROTECTED_URLS)
                 .addFilterBefore(authenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/_api/admin/**").hasRole("ADMIN")
-                .antMatchers("/_api/account/login").permitAll()
-                .antMatchers("/_api/account/register").permitAll()
-                .antMatchers("/_api/public").permitAll();
+                .antMatchers("/_api/**").hasRole("MEMBER")
+                .antMatchers("/_api/admin/**").hasRole("ADMIN");
+
     }
 
     @Bean

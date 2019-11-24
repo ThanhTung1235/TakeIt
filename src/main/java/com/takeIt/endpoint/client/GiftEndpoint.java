@@ -3,6 +3,7 @@ package com.takeIt.endpoint.client;
 import com.google.gson.Gson;
 import com.takeIt.dto.CategoryDTO;
 import com.takeIt.dto.GiftDTO;
+import com.takeIt.entity.Account;
 import com.takeIt.entity.Category;
 import com.takeIt.entity.Gift;
 import com.takeIt.rest.RESTPagination;
@@ -10,22 +11,29 @@ import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.AddressService;
 import com.takeIt.service.account.AccountService;
 import com.takeIt.service.category.CategoryService;
+import com.takeIt.service.credential.CredentialsService;
 import com.takeIt.service.gift.GiftService;
 import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.header.Header;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
 
+@CrossOrigin
 @RestController
 public class GiftEndpoint {
+    Logger logger = LoggerFactory.getLogger(GiftEndpoint.class);
     @Autowired
     GiftService giftService;
     @Autowired
@@ -34,6 +42,8 @@ public class GiftEndpoint {
     CategoryService categoryService;
     @Autowired
     AddressService addressService;
+    @Autowired
+    CredentialsService credentialsService;
 
     //get all or search gift by name
     @RequestMapping(value = "/api/products", method = RequestMethod.GET)
@@ -49,6 +59,12 @@ public class GiftEndpoint {
         Specification specification = Specification.where(null);
         specification = specification
                 .and(new GiftSpecification(new SearchCriteria("status", ":", Gift.Status.ACTIVE.getValue())));
+//        if (page >= 0){
+//            return null;
+//        }
+//        if (limit = 0){
+//            return null;
+//        }
         if (age > 0) {
             System.out.println("ageRange :" + age);
             specification = specification
@@ -100,7 +116,7 @@ public class GiftEndpoint {
 
     // getDetail gift
     @RequestMapping(method = RequestMethod.GET, value = "/api/products/{id}")
-    public ResponseEntity<Object> getProduct(@PathVariable long id) {
+    public ResponseEntity<Object> getProductPublish(@PathVariable long id) {
         Gift gift = giftService.getProduct(id);
         if (gift == null)
             return new ResponseEntity<>(new RESTResponse.SimpleError()
@@ -126,6 +142,25 @@ public class GiftEndpoint {
                 .setMessage("Save success!")
                 .setStatus(HttpStatus.CREATED.value())
                 .addData(gift).build(), HttpStatus.CREATED);
+    }
+
+    // getDetail gift
+    @RequestMapping(method = RequestMethod.GET, value = "/_api/products/{id}")
+    public ResponseEntity<Object> getProduct(@PathVariable long id, HttpServletRequest request) {
+        Gift gift = giftService.getProduct(id);
+        if (gift == null)
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage("Product not found")
+                    .build(),
+                    HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage("Success")
+                    .addData(new GiftDTO(gift))
+                    .build(),
+                    HttpStatus.OK);
     }
 
     // update gift

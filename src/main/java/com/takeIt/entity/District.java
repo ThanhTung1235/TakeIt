@@ -16,7 +16,7 @@ public class District {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "matp")
     private City city;
-    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "district", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Gift> gifts;
 
     public long getId() {

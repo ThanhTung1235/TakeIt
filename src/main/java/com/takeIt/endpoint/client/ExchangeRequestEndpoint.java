@@ -36,7 +36,7 @@ public class ExchangeRequestEndpoint {
                         .setMessage("Some thing wrong").build(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
             exchangeRequest.setId(Calendar.getInstance().getTimeInMillis());
-            requestService.sendSimpleMessage(accountInfo.getEmail(), exchangeRequest.getAccount().getUsername(), exchangeRequest.getId(), "Just test email text", "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
+            requestService.sendSimpleMessage(accountInfo.getEmail(), exchangeRequest.getAccount().getUsername(), exchangeRequest.getId(), exchangeRequest.getMessage(), "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
             exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);
             requestService.store(exchangeRequest);
             return new ResponseEntity<>(new RESTResponse.Success()

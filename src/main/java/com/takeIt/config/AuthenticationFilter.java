@@ -28,6 +28,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
             throw new AuthenticationCredentialsNotFoundException("Token not found!");
         }
         token = token.replaceAll("Bearer", "").trim();
+        httpServletRequest.setAttribute("apikey", token);
         Authentication requestAuthentication = new UsernamePasswordAuthenticationToken(token, token);
         return getAuthenticationManager().authenticate(requestAuthentication);
     }
@@ -37,4 +38,5 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         SecurityContextHolder.getContext().setAuthentication(authResult);
         chain.doFilter(request, response);
     }
+
 }

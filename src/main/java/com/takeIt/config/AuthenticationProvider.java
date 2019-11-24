@@ -53,10 +53,12 @@ public class AuthenticationProvider extends AbstractUserDetailsAuthenticationPro
         if (!accountOptional.isPresent()) return null;
 
         Account account = accountOptional.get();
+        if (account == null) {
+            System.out.println("not found account");
+        }
         String role = "";
         if (account.getRole() == Account.Roles.MEMBER.getValue()) role = "MEMBER";
         if (account.getRole() == Account.Roles.ADMIN.getValue()) role = "ADMIN";
-
         UserDetails userDetails = User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

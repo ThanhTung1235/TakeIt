@@ -26,7 +26,6 @@ public class GiftSpecification implements Specification<Gift> {
                 return builder.like(
                         root.<String>get(criteria.getKey()), "%" + criteria.getValue() + "%");
             } else {
-                System.out.println("is null");
                 return builder.equal(root.get(criteria.getKey()), criteria.getValue());
             }
         } else if (criteria.getOperation().equalsIgnoreCase("join")) {

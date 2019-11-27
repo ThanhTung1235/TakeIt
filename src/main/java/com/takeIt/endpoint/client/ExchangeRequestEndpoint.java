@@ -1,17 +1,20 @@
 package com.takeIt.endpoint.client;
 
 import com.takeIt.dto.RequestDTO;
+import com.takeIt.entity.Account;
 import com.takeIt.entity.AccountInfo;
 import com.takeIt.entity.ExchangeRequest;
 import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.accountInfo.AccountInfoService;
+import com.takeIt.service.credential.CredentialsService;
 import com.takeIt.service.exchangeRequest.ExchangeRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sun.net.www.content.image.gif;
 
 import javax.mail.MessagingException;
 import java.util.Calendar;
@@ -25,29 +28,54 @@ public class ExchangeRequestEndpoint {
     ExchangeRequestService requestService;
     @Autowired
     AccountInfoService infoService;
+    @Autowired
+    CredentialsService credentialsService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> saveRequest(@RequestBody ExchangeRequest exchangeRequest) throws MessagingException {
-        if (exchangeRequest.getAccount().getId() != exchangeRequest.getGift().getAccount().getId()) {
-            AccountInfo accountInfo = infoService.getAccountInfoByAccountId(exchangeRequest.getGift().getAccount().getId());
-            if (accountInfo == null) {
+    public ResponseEntity<Object> saveRequest(@RequestHeader("Authorization") String token, @RequestBody ExchangeRequest exchangeRequest) throws MessagingException {
+
+        token = token.replaceAll("Bearer", "").trim();
+        System.out.println(token);
+        Account a = credentialsService.finByToken(token);
+        Account account = new Account();
+        if (a != null) {
+            account.setId(a.getId());
+            exchangeRequest.setAccount(account);
+            if (exchangeRequest.getAccount().getId() != exchangeRequest.getGift().getAccount().getId()) {
+                AccountInfo accountInfo = infoService.getAccountInfoByAccountId(exchangeRequest.getGift().getAccount().getId());
+
+                if (accountInfo == null) {
+                    return new ResponseEntity<>(new RESTResponse.Success()
+                            .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .setMessage("Some thing wrong").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+
+                requestService.sendSimpleMessage(accountInfo.getEmail(),
+                        accountInfo.getFirstName() + accountInfo.getLastName(),
+                        exchangeRequest.getId(), exchangeRequest.getMessage(),
+                        exchangeRequest.getGift().getThumbnail());
+
+                exchangeRequest.setId(Calendar.getInstance().getTimeInMillis());
+                exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);
+                requestService.store(exchangeRequest);
+                return new ResponseEntity<>(new RESTResponse.Success()
+                        .addData(exchangeRequest)
+                        .setStatus(HttpStatus.CREATED.value())
+                        .setMessage(" ").build(), HttpStatus.CREATED);
+            } else {
                 return new ResponseEntity<>(new RESTResponse.Success()
                         .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                        .setMessage("Some thing wrong").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                        .setMessage("You can't get your gift").build(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
-            exchangeRequest.setId(Calendar.getInstance().getTimeInMillis());
-            requestService.sendSimpleMessage(accountInfo.getEmail(), exchangeRequest.getAccount().getUsername(), exchangeRequest.getId(), exchangeRequest.getMessage(), "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
-            exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);
-            requestService.store(exchangeRequest);
+        }else {
             return new ResponseEntity<>(new RESTResponse.Success()
-                    .addData(exchangeRequest)
-                    .setStatus(HttpStatus.CREATED.value())
-                    .setMessage(" ").build(), HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(new RESTResponse.Success()
-                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                    .setMessage("You can't get your gift").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                    .setStatus(HttpStatus.UNAUTHORIZED.value())
+                    .setMessage("unauthorized").build(), HttpStatus.UNAUTHORIZED);
         }
+
+
+
     }
 
     @RequestMapping(value = "/gift/{id}", method = RequestMethod.GET)

@@ -32,4 +32,17 @@ public class CredentialsServiceImpl implements CredentialsService {
         }
         return null;
     }
+
+    @Override
+    public Account finByToken(String token) {
+        Optional<Credential> optional = credentialRepository.findByAccessToken(token);
+        if (optional.isPresent()) {
+            long id = optional.get().getAccount().getId();
+            Optional<Account> account = accountRepository.findById(id);
+            if (!account.isPresent()) return null;
+
+            return account.get();
+        }
+        return null;
+    }
 }

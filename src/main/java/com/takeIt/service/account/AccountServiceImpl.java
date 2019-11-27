@@ -63,6 +63,31 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
+    @Override
+    public Credential loginAdmin(String username, String password) {
+        try {
+            Optional<Account> optionalAccount = accountRepository.findByUsername(username);
+            Credential credential = null;
+            if (optionalAccount.isPresent()) {
+                Account account = optionalAccount.get();
+                if (account.getRole() == Account.Roles.ADMIN.getValue()) {
+                    String passInput = StringUtil.hashPassword(password) + account.getSalt();
+                    if (passInput.equals(account.getPassword())) {
+                        String token = UUID.randomUUID().toString();
+                        credential = new Credential();
+                        credential.setAccessToken(token);
+                        credential.setAccount(account);
+                        credentialRepository.save(credential);
+                    }
+                }
+            }
+            return credential;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
     @Override
     public Account findByAccountId(long id) {

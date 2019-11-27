@@ -11,6 +11,7 @@ import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.account.AccountService;
 import com.takeIt.service.accountInfo.AccountInfoService;
+import com.takeIt.service.credential.CredentialsService;
 import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
 import com.takeIt.util.StringUtil;
@@ -37,12 +38,12 @@ public class AccountEndpoint {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+    @Autowired
+    CredentialsService credentialsService;
 
     @RequestMapping(value = "/_api/account", method = RequestMethod.GET)
     public ResponseEntity<Object> getList(
             @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "from", required = false) String from,
-            @RequestParam(value = "to", required = false) String to,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
         Specification specification = Specification.where(null);
@@ -80,6 +81,23 @@ public class AccountEndpoint {
                 HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/_api/account/{token}")
+    public ResponseEntity<Object> getDetailWithToken(@PathVariable String token) {
+        Account account = credentialsService.finByToken(token);
+        if (account == null) {
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage("Not found")
+                    .build(),
+                    HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setStatus(HttpStatus.OK.value())
+                .setMessage("Success")
+                .addData(new AccountDTO(account))
+                .build(),
+                HttpStatus.OK);
+    }
 
     @RequestMapping(method = RequestMethod.POST, value = "/register")
     public ResponseEntity<Object> register(@RequestBody Account account) {

@@ -26,6 +26,7 @@ import org.springframework.security.web.header.Header;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,17 +67,14 @@ public class GiftEndpoint {
 //            return null;
 //        }
         if (age > 0) {
-            System.out.println("ageRange :" + age);
             specification = specification
-                    .and(new GiftSpecification(new SearchCriteria("ageRange", ":", age)));
+                    .and(new GiftSpecification(new SearchCriteria("age_range", ":", age)));
         }
         if (gender > 0) {
-            System.out.println("Gender :" + gender);
             specification = specification
                     .and(new GiftSpecification(new SearchCriteria("gender", ":", gender)));
         }
         if (cityName != null && cityName.length() > 0) {
-            System.out.println("cityName: " + cityName);
             specification = specification
                     .and(new GiftSpecification(new SearchCriteria("city", "join", cityName)));
         }
@@ -135,8 +133,19 @@ public class GiftEndpoint {
 
     // create gift
     @RequestMapping(method = RequestMethod.POST, value = "/_api/products/create")
-    public ResponseEntity<Object> saveProduct(@RequestBody Gift gift) {
-        System.out.println(new Gson().toJson(gift));
+    public ResponseEntity<Object> saveProduct(@RequestHeader("Authorization") String token, @RequestBody Gift gift) {
+        token = token.replaceAll("Bearer", "").trim();
+        System.out.println(token);
+        Account account = credentialsService.finByToken(token);
+        if (account == null) {
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setMessage("Some thing wrong")
+                    .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .addData(gift).build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        Account a = new Account();
+        a.setId(account.getId());
+        gift.setAccount(a);
         giftService.store(gift);
         return new ResponseEntity<>(new RESTResponse.Success()
                 .setMessage("Save success!")

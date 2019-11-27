@@ -11,6 +11,8 @@ public interface AccountService {
 
     Credential login(String username, String password);
 
+    Credential loginAdmin(String username, String password);
+
     Account findByAccountId(long id);
 
     Account register(Account account);

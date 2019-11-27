@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface CredentialsService {
     User findByToken(String token);
+
+    Account finByToken(String token);
 }

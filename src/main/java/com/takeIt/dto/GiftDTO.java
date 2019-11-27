@@ -4,6 +4,8 @@ import com.takeIt.entity.Gift;
 import com.takeIt.util.DateTimeUtil;
 import com.takeIt.util.ObjectUtil;
 
+import java.util.List;
+
 public class GiftDTO {
     private long id;
     private String name;
@@ -20,7 +22,7 @@ public class GiftDTO {
     private String updatedAt;
     private String deletedAt;
     private String email;
-    private String thumbnail;
+    private String[] thumbnail;
 
     public GiftDTO(Gift gift) {
         ObjectUtil.cloneObject(this, gift);
@@ -35,7 +37,10 @@ public class GiftDTO {
         this.accountName = gift.getAccount().getUsername();
         this.categoryName = gift.getCategory().getName();
         this.email = gift.getAccount().getAccountInfo().getEmail();
-        this.thumbnail = gift.getThumbnail();
+
+        String thumbnails = gift.getThumbnail();
+        String[] parts = thumbnails.split(",");
+        this.thumbnail = parts;
         this.createdAt = DateTimeUtil.formatDateFromLong(gift.getCreatedAt());
         this.updatedAt = DateTimeUtil.formatDateFromLong(gift.getUpdatedAt());
         this.deletedAt = DateTimeUtil.formatDateFromLong(gift.getDeletedAt());
@@ -161,11 +166,19 @@ public class GiftDTO {
         this.accountId = accountId;
     }
 
-    public String getThumbnail() {
+    public String[] getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(String thumbnail) {
+    public void setThumbnail(String[] thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public static void main(String[] args) {
+        String url = "http://res.cloudinary.com/simpletake/image/upload/v1574760575/angular_sample/tmtlud8pfhoy5wfzz7aw.jpg,http://res.cloudinary.com/simpletake/image/upload/v1574760585/angular_sample/lp5f1bqndwr5p5oi7pnb.jpg";
+        String[] parts = url.split(",");
+        for (String a : parts) {
+            System.out.println(a);
+        }
     }
 }

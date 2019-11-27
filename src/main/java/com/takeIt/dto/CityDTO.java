@@ -1,11 +1,9 @@
 package com.takeIt.dto;
 
 import com.takeIt.entity.City;
-import com.takeIt.entity.District;
 import com.takeIt.util.ObjectUtil;
 
-import java.util.List;
-import java.util.Set;
+
 
 public class CityDTO {
     private long id;

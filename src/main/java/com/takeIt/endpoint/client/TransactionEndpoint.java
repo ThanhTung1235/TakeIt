@@ -78,7 +78,7 @@ public class TransactionEndpoint {
                         long accountId = gift.getAccount().getId();
                         AccountInfo accountInfo = accountInfoService.getAccountInfoByAccountId(accountId);
                         Account account = accountService.getAccount(transaction.getAccount().getId());
-
+// 3 day send email confirm
                         transactionService.sendMailConfirm(accountInfo.getEmail(), account.getUsername(), transaction.getId(), "", "https://media.shoptretho.com.vn/upload/image/product/20170721/xe-day-tre-em-gluck-b6-2017-2.jpg");
                         System.out.println("equals date");
                     } else System.out.println("not equals date");

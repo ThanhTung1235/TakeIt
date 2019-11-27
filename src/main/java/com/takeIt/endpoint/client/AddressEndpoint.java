@@ -38,7 +38,6 @@ public class AddressEndpoint {
     @RequestMapping(method = RequestMethod.GET, value = "/cities")
     public ResponseEntity<Object> getCities() {
         try {
-            System.out.println("hello world");
             List<City> cities = addressService.getCities();
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setMessage("Get success")

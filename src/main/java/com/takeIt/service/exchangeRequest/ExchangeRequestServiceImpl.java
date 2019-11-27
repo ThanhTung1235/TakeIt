@@ -1,5 +1,6 @@
 package com.takeIt.service.exchangeRequest;
 
+import com.takeIt.entity.Account;
 import com.takeIt.entity.ExchangeRequest;
 import com.takeIt.entity.Gift;
 import com.takeIt.entity.Transaction;
@@ -55,21 +56,30 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
 
 
     @Override
-    public ExchangeRequest updateStatusRequest(long id, boolean status) {
+    public ExchangeRequest updateStatusRequest(long id, boolean status, Account account) {
+
         Optional<ExchangeRequest> requestOption = exchangeRequestRepository.findById(id);
         if (requestOption.isPresent()) {
             ExchangeRequest requestExist = requestOption.get();
-            if (status) {
-                requestExist.setStatus(ExchangeRequest.Status.CONFIRMED);
-                exchangeRequestRepository.save(requestExist);
-                createTransaction(requestExist);
-            } else {
-                requestExist.setStatus(ExchangeRequest.Status.CANCEL);
-                exchangeRequestRepository.save(requestExist);
-            }
+            Optional<Gift> gift = giftRepository.findById(requestExist.getGift().getId());
+            if (gift.isPresent()) {
+                long accountId = gift.get().getAccount().getId();
+                System.out.println("accountId: " + account.getId() + "account from gift" + accountId);
+                if (accountId == account.getId()) {
+                    System.out.println("status: " + status);
+                    if (status) {
+                        requestExist.setStatus(ExchangeRequest.Status.CONFIRMED);
+                        exchangeRequestRepository.save(requestExist);
+                        createTransaction(requestExist);
+                    } else {
+                        requestExist.setStatus(ExchangeRequest.Status.CANCEL);
+                        exchangeRequestRepository.save(requestExist);
+                    }
+                }
+            } else return null;
+
             return requestExist;
-        } else
-            return null;
+        } else return null;
     }
 
     @Override
@@ -77,14 +87,14 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         return exchangeRequestRepository.findByAccount_IdAndGift_Id(receiverId, giftId).orElse(null);
     }
 
-    public void sendSimpleMessage(String to, String receiverName, long id, String text, String thumbnail) throws
+    public void sendSimpleMessage(String to, String receiverName, long id, String text, String thumbnail, String token) throws
             MessagingException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setTo(to);
         helper.setSubject("Simple take");
-        String confirm = "http://localhost:8080/_api/exchanges/" + id + "?status=true";
-        String cancel = "http://localhost:8080/_api/exchanges/" + id + "?status=false";
+        String confirm = "http://localhost:8080/exchanges/" + id + "?status=true&ref=" + token;
+        String cancel = "http://localhost:8080/exchanges/" + id + "?status=false&ref=" + token;
         helper.setText("<!doctype html>\n" +
                 "<html>\n" +
                 "  <head>\n" +

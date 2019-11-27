@@ -1,11 +1,13 @@
 package com.takeIt.endpoint.client;
 
+import com.google.gson.Gson;
 import com.takeIt.dto.RequestDTO;
 import com.takeIt.entity.Account;
 import com.takeIt.entity.AccountInfo;
 import com.takeIt.entity.ExchangeRequest;
 import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
+import com.takeIt.service.account.AccountService;
 import com.takeIt.service.accountInfo.AccountInfoService;
 import com.takeIt.service.credential.CredentialsService;
 import com.takeIt.service.exchangeRequest.ExchangeRequestService;
@@ -14,9 +16,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sun.net.www.content.image.gif;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Calendar;
 import java.util.stream.Collectors;
 
@@ -30,20 +32,20 @@ public class ExchangeRequestEndpoint {
     AccountInfoService infoService;
     @Autowired
     CredentialsService credentialsService;
+    @Autowired
+    AccountService accountService;
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Object> saveRequest(@RequestHeader("Authorization") String token, @RequestBody ExchangeRequest exchangeRequest) throws MessagingException {
 
         token = token.replaceAll("Bearer", "").trim();
-        System.out.println(token);
-        Account a = credentialsService.finByToken(token);
         Account account = new Account();
+        Account a = credentialsService.finByToken(token);
         if (a != null) {
             account.setId(a.getId());
             exchangeRequest.setAccount(account);
             if (exchangeRequest.getAccount().getId() != exchangeRequest.getGift().getAccount().getId()) {
                 AccountInfo accountInfo = infoService.getAccountInfoByAccountId(exchangeRequest.getGift().getAccount().getId());
-
                 if (accountInfo == null) {
                     return new ResponseEntity<>(new RESTResponse.Success()
                             .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
@@ -52,7 +54,7 @@ public class ExchangeRequestEndpoint {
 
 
                 requestService.sendSimpleMessage(accountInfo.getEmail(),
-                        accountInfo.getFirstName() + accountInfo.getLastName(),
+                        a.getUsername(),
                         exchangeRequest.getId(), exchangeRequest.getMessage(),
                         exchangeRequest.getGift().getThumbnail());
 
@@ -68,27 +70,36 @@ public class ExchangeRequestEndpoint {
                         .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
                         .setMessage("You can't get your gift").build(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        }else {
+        } else {
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.UNAUTHORIZED.value())
                     .setMessage("unauthorized").build(), HttpStatus.UNAUTHORIZED);
         }
-
-
-
     }
+
 
     @RequestMapping(value = "/gift/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getRequestOfGift(
+            HttpServletRequest request,
             @PathVariable long id,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
-        Page<ExchangeRequest> exchangeRequests = requestService.getRequestOfGift(id, page, limit);
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setPagination(new RESTPagination(page, limit, exchangeRequests.getTotalPages(), exchangeRequests.getTotalElements()))
-                .addData(exchangeRequests.stream().map(x -> new RequestDTO(x)).collect(Collectors.toList()))
-                .setStatus(HttpStatus.CREATED.value())
-                .setMessage(" ").build(), HttpStatus.CREATED);
+        Account account = (Account) request.getAttribute("account");
+
+        System.out.println(account.getUsername());
+        Page<ExchangeRequest> exchangeRequests = requestService.getRequestOfGift(id, account.getId(), page, limit);
+        if (exchangeRequests != null) {
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setPagination(new RESTPagination(page, limit, exchangeRequests.getTotalPages(), exchangeRequests.getTotalElements()))
+                    .addData(exchangeRequests.stream().map(x -> new RequestDTO(x)).collect(Collectors.toList()))
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage(" ").build(), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage(" ").build(), HttpStatus.NOT_FOUND);
+        }
+
     }
 
     @RequestMapping(value = "/receiver/{id}", method = RequestMethod.GET)

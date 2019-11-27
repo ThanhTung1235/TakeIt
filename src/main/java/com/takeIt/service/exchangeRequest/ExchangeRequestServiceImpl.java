@@ -1,8 +1,10 @@
 package com.takeIt.service.exchangeRequest;
 
 import com.takeIt.entity.ExchangeRequest;
+import com.takeIt.entity.Gift;
 import com.takeIt.entity.Transaction;
 import com.takeIt.repository.ExchangeRequestRepository;
+import com.takeIt.repository.GiftRepository;
 import com.takeIt.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,6 +27,8 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     public JavaMailSender emailSender;
     @Autowired
     TransactionRepository transactionRepository;
+    @Autowired
+    GiftRepository giftRepository;
 
     @Override
     public ExchangeRequest store(ExchangeRequest exchangeRequest) {
@@ -37,8 +41,16 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     }
 
     @Override
-    public Page<ExchangeRequest> getRequestOfGift(long giftId, int page, int limit) {
-        return exchangeRequestRepository.findByGift_Id(giftId, PageRequest.of(page - 1, limit));
+    public Page<ExchangeRequest> getRequestOfGift(long giftId, long accountId, int page, int limit) {
+        Optional<Gift> optional = giftRepository.findById(giftId);
+        if (optional.isPresent()) {
+            long accountExist = optional.get().getAccount().getId();
+            if (accountExist == accountId) {
+                return exchangeRequestRepository.findByGift_Id(giftId, PageRequest.of(page - 1, limit));
+            } else return null;
+        } else return null;
+
+
     }
 
 
@@ -60,7 +72,13 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
             return null;
     }
 
-    public void sendSimpleMessage(String to, String receiverName, long id, String text, String thumbnail) throws MessagingException {
+    @Override
+    public ExchangeRequest findByAccountIdAndGiftId(long receiverId, long giftId) {
+        return exchangeRequestRepository.findByAccount_IdAndGift_Id(receiverId, giftId).orElse(null);
+    }
+
+    public void sendSimpleMessage(String to, String receiverName, long id, String text, String thumbnail) throws
+            MessagingException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setTo(to);
@@ -119,8 +137,8 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
                 "    <div class=\"card-tile\">\n" +
                 "      Xin chào\n" +
                 "    </div>\n" +
-                "    <p>Nguoi dung'" + receiverName + "muon den nhan mot mon do ma ban da chia se tren Simple take voi loi nhan : '</p>\n" +
-                "    <p>'" + text + "'</p>\n" +
+                "    <p>Nguoi dung " + receiverName + " muon den nhan mot mon do ma ban da chia se tren Simple take voi loi nhan : </p>\n" +
+                "    <p>" + text + "</p>\n" +
                 "        <div style=\"display:flex; justify-content: center\">\n" +
                 "      <img src='" + thumbnail + "' width=\"400\">\n" +
                 "    </div>\n" +

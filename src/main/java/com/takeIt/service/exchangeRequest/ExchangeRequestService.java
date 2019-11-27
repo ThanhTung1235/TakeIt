@@ -11,9 +11,11 @@ public interface ExchangeRequestService {
 
     Page<ExchangeRequest> getRequestOfReceiver(long receiverId, int page, int limit);
 
-    Page<ExchangeRequest> getRequestOfGift(long giftId, int page, int limit);
+    Page<ExchangeRequest> getRequestOfGift(long giftId,long accountId, int page, int limit);
 
     void sendSimpleMessage(String to, String receiverName, long id, String text, String thumbnail) throws MessagingException;
 
     ExchangeRequest updateStatusRequest(long id, boolean status);
+
+    ExchangeRequest findByAccountIdAndGiftId(long receiverId, long giftId);
 }

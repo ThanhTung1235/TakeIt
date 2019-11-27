@@ -11,6 +11,8 @@ import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
 import com.takeIt.util.StringUtil;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,6 +28,8 @@ import java.util.UUID;
 
 @Service
 public class AccountServiceImpl implements AccountService {
+
+    Logger logger = LoggerFactory.getLogger(AccountService.class);
     @Autowired
     AccountRepository accountRepository;
     @Autowired
@@ -96,7 +100,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account register(Account account) {
-        return accountRepository.save(account);
+        Optional<Account> optional = accountRepository.findByUsername(account.getUsername());
+        if (optional.isPresent()) {
+            logger.info("Ten tai khoan da co");
+            return null;
+        }else {
+            return accountRepository.save(account);
+        }
     }
 
     @Override

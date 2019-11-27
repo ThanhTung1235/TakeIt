@@ -16,6 +16,8 @@ import com.takeIt.specification.GiftSpecification;
 import com.takeIt.specification.SearchCriteria;
 import com.takeIt.util.StringUtil;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
@@ -30,6 +32,7 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/account")
 @CrossOrigin
 public class AccountEndpoint {
+    Logger logger = LoggerFactory.getLogger(AccountEndpoint.class);
     @Autowired
     AccountService accountService;
 
@@ -109,11 +112,16 @@ public class AccountEndpoint {
             account.setPassword(hashPass);
             account.setSalt(salt);
             Account a = accountService.register(account);
-
+            if (a == null){
+                return new ResponseEntity<>(new RESTResponse.Error()
+                        .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .setMessage("Tên tài khoản đã được sử dụng").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.CREATED.value())
                     .setMessage("Register success!")
                     .addData(new AccountDTO(a)).build(), HttpStatus.CREATED);
+
         } catch (Exception e) {
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())

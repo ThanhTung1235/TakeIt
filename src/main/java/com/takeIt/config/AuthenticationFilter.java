@@ -1,5 +1,9 @@
 package com.takeIt.config;
 
+import com.takeIt.entity.Account;
+import com.takeIt.service.account.AccountService;
+import com.takeIt.service.credential.CredentialsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,6 +21,9 @@ import java.io.IOException;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+    @Autowired
+    CredentialsService credentialsService;
+
     AuthenticationFilter(final RequestMatcher requiresAuth) {
         super(requiresAuth);
     }
@@ -29,6 +36,8 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         }
         token = token.replaceAll("Bearer", "").trim();
         httpServletRequest.setAttribute("apikey", token);
+        Account account = credentialsService.finByToken(token);
+        httpServletRequest.setAttribute("account", account);
         Authentication requestAuthentication = new UsernamePasswordAuthenticationToken(token, token);
         return getAuthenticationManager().authenticate(requestAuthentication);
     }

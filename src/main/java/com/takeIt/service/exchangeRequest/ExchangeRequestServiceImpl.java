@@ -40,7 +40,10 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     public Page<ExchangeRequest> getRequestOfReceiver(long receiverId, int page, int limit) {
         return exchangeRequestRepository.findByAccount_Id(receiverId, PageRequest.of(page - 1, limit));
     }
-
+    @Override
+    public Page<ExchangeRequest> getRequestOfOwner(long owner, int page, int limit) {
+        return exchangeRequestRepository.findByOwnerId(owner, PageRequest.of(page - 1, limit));
+    }
     @Override
     public Page<ExchangeRequest> getRequestOfGift(long giftId, long accountId, int page, int limit) {
         Optional<Gift> optional = giftRepository.findById(giftId);
@@ -61,19 +64,25 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         Optional<ExchangeRequest> requestOption = exchangeRequestRepository.findById(id);
         if (requestOption.isPresent()) {
             ExchangeRequest requestExist = requestOption.get();
-            Optional<Gift> gift = giftRepository.findById(requestExist.getGift().getId());
+            long gifId = requestExist.getGift().getId();
+
+            Optional<Gift> gift = giftRepository.findById(gifId);
             if (gift.isPresent()) {
                 long accountId = gift.get().getAccount().getId();
-                System.out.println("accountId: " + account.getId() + "account from gift" + accountId);
+                Gift g = gift.get();
                 if (accountId == account.getId()) {
                     System.out.println("status: " + status);
                     if (status) {
+                        g.setStatus(Gift.Status.EXCHANGE_PENDING);
                         requestExist.setStatus(ExchangeRequest.Status.CONFIRMED);
                         exchangeRequestRepository.save(requestExist);
+                        giftRepository.save(g);
                         createTransaction(requestExist);
                     } else {
+                        g.setStatus(Gift.Status.ACTIVE);
                         requestExist.setStatus(ExchangeRequest.Status.CANCEL);
                         exchangeRequestRepository.save(requestExist);
+                        giftRepository.save(g);
                     }
                 }
             } else return null;
@@ -174,6 +183,7 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
         Transaction transaction = new Transaction();
         transaction.setAccount(exchangeRequest.getAccount());
         transaction.setGift(exchangeRequest.getGift());
+        transaction.setOwnerId(exchangeRequest.getGift().getAccount().getId());
         transaction.setStatus(Transaction.Status.IS_EXCHANGING);
         transaction.setExchangeRequest(exchangeRequest);
 

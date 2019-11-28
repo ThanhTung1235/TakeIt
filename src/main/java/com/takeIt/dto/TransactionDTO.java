@@ -6,7 +6,8 @@ import com.takeIt.util.DateTimeUtil;
 public class TransactionDTO {
     private long id;
     private long accountId;
-    private String accountName;
+    private String receiverName;
+    private String ownerName;
     private long giftId;
     private String giftName;
     private long requestId;
@@ -17,20 +18,21 @@ public class TransactionDTO {
 
     public TransactionDTO(Transaction transaction) {
         this.id = transaction.getId();
-        this.accountName = transaction.getAccount().getUsername();
+        this.receiverName = transaction.getAccount().getUsername();
         this.accountId = transaction.getAccount().getId();
         this.giftId = transaction.getGift().getId();
         this.giftName = transaction.getGift().getName();
+        this.ownerName = transaction.getGift().getAccount().getUsername();
         this.requestId = transaction.getExchangeRequest().getId();
         switch (transaction.getStatus()) {
             case -1:
-                this.status = "CANCEL_EXCHANGING";
+                this.status = "Hủy giao dịch";
                 break;
             case 0:
-                this.status = "IS_EXCHANGING";
+                this.status = "Đang giao dịch";
                 break;
             case 1:
-                this.status = "DONE";
+                this.status = "Hoàn thành";
                 break;
             default:
                 break;
@@ -56,12 +58,12 @@ public class TransactionDTO {
         this.accountId = accountId;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getReceiverName() {
+        return receiverName;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
     }
 
     public long getGiftId() {
@@ -118,5 +120,13 @@ public class TransactionDTO {
 
     public void setExpirationAt(String expirationAt) {
         this.expirationAt = expirationAt;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }

@@ -27,6 +27,7 @@ public class AccountInfoServiceImpl implements AccountInfoService {
     public AccountInfo findByAccountId(long id) {
         return accountInfoRepository.findAccountInfoByAccount_Id(id).orElse(null);
     }
+
     //son.6-11
     @Override
     public AccountInfo findByAccountInfoId(long id) {
@@ -45,7 +46,7 @@ public class AccountInfoServiceImpl implements AccountInfoService {
 
     @Override
     public AccountInfo getAccountInfo(long id) {
-        return null;
+        return accountInfoRepository.findByAccount_Id(id).orElse(null);
     }
 
     @Override

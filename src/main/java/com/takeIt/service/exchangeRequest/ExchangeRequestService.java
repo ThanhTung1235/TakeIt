@@ -12,6 +12,8 @@ public interface ExchangeRequestService {
 
     Page<ExchangeRequest> getRequestOfReceiver(long receiverId, int page, int limit);
 
+    Page<ExchangeRequest> getRequestOfOwner(long ownerId, int page, int limit);
+
     Page<ExchangeRequest> getRequestOfGift(long giftId, long accountId, int page, int limit);
 
     void sendSimpleMessage(String to, String receiverName, long id, String text, String thumbnail, String token) throws MessagingException;

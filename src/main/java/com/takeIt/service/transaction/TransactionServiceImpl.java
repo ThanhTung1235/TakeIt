@@ -31,8 +31,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Page<Transaction> getAll(int page, int limit) {
-        return transactionRepository.findAll(PageRequest.of(page - 1, limit));
+    public Page<Transaction> getAllReceiver(long accountId, int page, int limit) {
+        return transactionRepository.findByAccount_Id(accountId, PageRequest.of(page - 1, limit));
+    }
+
+    @Override
+    public Page<Transaction> getAllOfOwner(long accountId, int page, int limit) {
+        return transactionRepository.findByOwnerId(accountId, PageRequest.of(page - 1, limit));
     }
 
     @Override

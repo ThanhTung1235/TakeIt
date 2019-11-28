@@ -14,6 +14,7 @@ public class Transaction {
     private Gift gift;
     @OneToOne
     private ExchangeRequest exchangeRequest;
+    private long ownerId;
     private int status;
     private long createdAt;
     private long updatedAt;
@@ -89,6 +90,14 @@ public class Transaction {
 
     public void setExpirationAt(long expirationAt) {
         this.expirationAt = expirationAt;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public enum Status {

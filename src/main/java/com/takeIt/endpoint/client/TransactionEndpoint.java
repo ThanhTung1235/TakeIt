@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,12 +42,19 @@ public class TransactionEndpoint {
     AccountService accountService;
 
 
-    @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<Object> getAllTransaction(
+    @RequestMapping(method = RequestMethod.GET, value = "/receiver")
+    public ResponseEntity<Object> getTransactionOfReceiver(
+            HttpServletRequest request,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
         try {
-            Page<Transaction> transactions = transactionService.getAll(page, limit);
+            Account account = (Account) request.getAttribute("account");
+            if (account == null) {
+                return new ResponseEntity<>(new RESTResponse.SimpleError()
+                        .setCode(HttpStatus.FORBIDDEN.value())
+                        .setMessage("FORBIDDEN !").build(), HttpStatus.FORBIDDEN);
+            }
+            Page<Transaction> transactions = transactionService.getAllReceiver(account.getId(), page, limit);
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.OK.value())
                     .setPagination(new RESTPagination(page, limit, transactions.getTotalPages(), transactions.getTotalElements()))
@@ -62,6 +70,33 @@ public class TransactionEndpoint {
 
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/owner")
+    public ResponseEntity<Object> getTransactionOfOwner(
+            HttpServletRequest request,
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit) {
+        try {
+            Account account = (Account) request.getAttribute("account");
+            if (account == null) {
+                return new ResponseEntity<>(new RESTResponse.SimpleError()
+                        .setCode(HttpStatus.FORBIDDEN.value())
+                        .setMessage("FORBIDDEN !").build(), HttpStatus.FORBIDDEN);
+            }
+            Page<Transaction> transactions = transactionService.getAllOfOwner(account.getId(), page, limit);
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setPagination(new RESTPagination(page, limit, transactions.getTotalPages(), transactions.getTotalElements()))
+                    .addData(transactions.getContent().stream().map(x -> new TransactionDTO(x)).collect(Collectors.toList()))
+                    .setMessage("")
+                    .build(), HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                    .setMessage("server error").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
     //http://localhost:8080/_api/transactions/transactionConfirm "cron job 12am"
     @RequestMapping(method = RequestMethod.GET, value = "/transactionConfirm")

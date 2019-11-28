@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GiftRepository extends JpaRepository<Gift, Long>, JpaSpecificationExecutor<Gift> {
-//    Page<Gift> findByStatus(Specification<Gift> specification, Pageable pageable, int status);
+    //    Page<Gift> findByStatus(Specification<Gift> specification, Pageable pageable, int status);
     Optional<Gift> findByIdAndStatus(long id, int status);
+
+    List<Gift> findByAccount_IdAndStatus(long id, int status);
 }

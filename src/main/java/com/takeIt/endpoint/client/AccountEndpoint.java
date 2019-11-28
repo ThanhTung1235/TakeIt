@@ -26,10 +26,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/account")
 @CrossOrigin
 public class AccountEndpoint {
     Logger logger = LoggerFactory.getLogger(AccountEndpoint.class);
@@ -44,7 +44,7 @@ public class AccountEndpoint {
     @Autowired
     CredentialsService credentialsService;
 
-    @RequestMapping(value = "/_api/account", method = RequestMethod.GET)
+    @RequestMapping(value = "/_api/accounts", method = RequestMethod.GET)
     public ResponseEntity<Object> getList(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(defaultValue = "1", required = false) int page,
@@ -66,27 +66,13 @@ public class AccountEndpoint {
                 HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Object> getDetail(@PathVariable String id) {
-        Account account = accountService.findByAccountId(Long.parseLong(id));
-        if (account == null) {
-            return new ResponseEntity<>(new RESTResponse.SimpleError()
-                    .setCode(HttpStatus.NOT_FOUND.value())
-                    .setMessage("Not found")
-                    .build(),
-                    HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setStatus(HttpStatus.OK.value())
-                .setMessage("Success")
-                .addData(new AccountDTO(accountService.findByAccountId(Long.parseLong(id))))
-                .build(),
-                HttpStatus.OK);
-    }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/_api/account/{token}")
-    public ResponseEntity<Object> getDetailWithToken(@PathVariable String token) {
-        Account account = credentialsService.finByToken(token);
+
+
+    @RequestMapping(method = RequestMethod.GET, value = "/_api/account")
+    public ResponseEntity<Object> getDetailWithToken(HttpServletRequest request) {
+        Account account = (Account) request.getAttribute("account");
+
         if (account == null) {
             return new ResponseEntity<>(new RESTResponse.SimpleError()
                     .setCode(HttpStatus.NOT_FOUND.value())
@@ -102,7 +88,7 @@ public class AccountEndpoint {
                 HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/register")
+    @RequestMapping(method = RequestMethod.POST, value = "/account/register")
     public ResponseEntity<Object> register(@RequestBody Account account) {
         try {
             String salt = StringUtil.generateSalt();
@@ -112,7 +98,7 @@ public class AccountEndpoint {
             account.setPassword(hashPass);
             account.setSalt(salt);
             Account a = accountService.register(account);
-            if (a == null){
+            if (a == null) {
                 return new ResponseEntity<>(new RESTResponse.Error()
                         .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
                         .setMessage("Tên tài khoản đã được sử dụng").build(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -129,7 +115,7 @@ public class AccountEndpoint {
         }
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/account/login", method = RequestMethod.POST)
     public ResponseEntity<Object> login(@RequestBody Account account) {
         Credential credential = accountService.login(account.getUsername(), account.getPassword());
         if (credential == null) {
@@ -143,4 +129,22 @@ public class AccountEndpoint {
                 .setStatus(HttpStatus.OK.value())
                 .addData(new CredentialDTO(credential)).build(), HttpStatus.OK);
     }
+
+//    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+//    public ResponseEntity<Object> getDetail(@PathVariable String id) {
+//        Account account = accountService.findByAccountId(Long.parseLong(id));
+//        if (account == null) {
+//            return new ResponseEntity<>(new RESTResponse.SimpleError()
+//                    .setCode(HttpStatus.NOT_FOUND.value())
+//                    .setMessage("Not found")
+//                    .build(),
+//                    HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(new RESTResponse.Success()
+//                .setStatus(HttpStatus.OK.value())
+//                .setMessage("Success")
+//                .addData(new AccountDTO(accountService.findByAccountId(Long.parseLong(id))))
+//                .build(),
+//                HttpStatus.OK);
+//    }
 }

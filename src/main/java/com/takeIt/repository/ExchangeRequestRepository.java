@@ -15,5 +15,7 @@ public interface ExchangeRequestRepository extends JpaRepository<ExchangeRequest
 
     Page<ExchangeRequest> findByAccount_Id(long id, Pageable pageable);
 
+    Page<ExchangeRequest> findByOwnerId(long ownerId, Pageable pageable);
+
     Optional<ExchangeRequest> findByAccount_IdAndGift_Id(long receiver, long giftId);
 }

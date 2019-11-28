@@ -10,7 +10,9 @@ import java.util.List;
 public interface TransactionService {
     Transaction store(Transaction transaction);
 
-    Page<Transaction> getAll(int page, int limit);
+    Page<Transaction> getAllReceiver(long accountId,int page, int limit);
+
+    Page<Transaction> getAllOfOwner(long accountId,int page, int limit);
 
     List<Transaction> transactions();
 

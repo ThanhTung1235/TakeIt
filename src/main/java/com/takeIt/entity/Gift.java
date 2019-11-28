@@ -40,7 +40,8 @@ public class Gift {
         DELETED(-1),
         PENDING(0),
         ACTIVE(1),
-        EXCHANGE_DONE(2);
+        EXCHANGE_DONE(3),
+        EXCHANGE_PENDING(2);
 
         int value;
 

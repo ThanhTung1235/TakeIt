@@ -40,23 +40,23 @@ public class AccountAdminEndpoint {
     }
 
     //get account
-    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-    public ResponseEntity<Object> getDetail(@PathVariable String id) {
-        Account account = accountService.findByAccountId(Long.parseLong(id));
-        if (account == null) {
-            return new ResponseEntity<>(new RESTResponse.SimpleError()
-                    .setCode(HttpStatus.NOT_FOUND.value())
-                    .setMessage("Not found")
-                    .build(),
-                    HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setStatus(HttpStatus.OK.value())
-                .setMessage("Success")
-                .addData(new AccountDTO(accountService.findByAccountId(Long.parseLong(id))))
-                .build(),
-                HttpStatus.OK);
-    }
+//    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+//    public ResponseEntity<Object> getDetail(@PathVariable String id) {
+//        Account account = accountService.findByAccountId(0);
+//        if (account == null) {
+//            return new ResponseEntity<>(new RESTResponse.SimpleError()
+//                    .setCode(HttpStatus.NOT_FOUND.value())
+//                    .setMessage("Not found")
+//                    .build(),
+//                    HttpStatus.NOT_FOUND);
+//        }
+//        return new ResponseEntity<>(new RESTResponse.Success()
+//                .setStatus(HttpStatus.OK.value())
+//                .setMessage("Success")
+//                .addData(new AccountDTO(accountService.findByAccountId(Long.parseLong(id))))
+//                .build(),
+//                HttpStatus.OK);
+//    }
 
     //xóa account
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")

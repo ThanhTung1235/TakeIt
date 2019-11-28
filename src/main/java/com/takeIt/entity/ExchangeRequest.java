@@ -9,6 +9,7 @@ public class ExchangeRequest {
     @Id
     private long id;
     private String message;
+    private long ownerId;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Account account;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
@@ -86,6 +87,14 @@ public class ExchangeRequest {
             }
             return null;
         }
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
     }
 
     public static void main(String[] args) {

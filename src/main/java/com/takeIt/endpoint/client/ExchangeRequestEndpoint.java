@@ -64,7 +64,7 @@ public class ExchangeRequestEndpoint {
                         exchangeRequest.getGift().getThumbnail(),
                         gaid.toString());
 
-
+                exchangeRequest.setOwnerId(gaid);
                 exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);
                 requestService.store(exchangeRequest);
                 return new ResponseEntity<>(new RESTResponse.Success()
@@ -74,7 +74,7 @@ public class ExchangeRequestEndpoint {
             } else {
                 return new ResponseEntity<>(new RESTResponse.Success()
                         .setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                        .setMessage("You can't get your gift").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+                        .setMessage("Bạn không thể nhận món đồ của bạn").build(), HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
             return new ResponseEntity<>(new RESTResponse.Success()
@@ -82,7 +82,6 @@ public class ExchangeRequestEndpoint {
                     .setMessage("unauthorized").build(), HttpStatus.UNAUTHORIZED);
         }
     }
-
 
     @RequestMapping(value = URL_PATH + "/gift/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getRequestOfGift(
@@ -111,18 +110,7 @@ public class ExchangeRequestEndpoint {
 
     }
 
-    @RequestMapping(value = URL_PATH + "/receiver/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getRequestOfReceiver(
-            @PathVariable long id,
-            @RequestParam(defaultValue = "1", required = false) int page,
-            @RequestParam(defaultValue = "10", required = false) int limit) {
-        Page<ExchangeRequest> exchangeRequests = requestService.getRequestOfReceiver(id, page, limit);
-        return new ResponseEntity<>(new RESTResponse.Success()
-                .setPagination(new RESTPagination(page, limit, exchangeRequests.getTotalPages(), exchangeRequests.getTotalElements()))
-                .addData(exchangeRequests.stream().map(x -> new RequestDTO(x)).collect(Collectors.toList()))
-                .setStatus(HttpStatus.OK.value())
-                .setMessage(" ").build(), HttpStatus.OK);
-    }
+
 
     @RequestMapping(value = URL_PATH + "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> updateStatusRequest(
@@ -172,5 +160,44 @@ public class ExchangeRequestEndpoint {
 
         }
 
+    }
+
+
+    @RequestMapping(value = URL_PATH + "/receiver", method = RequestMethod.GET)
+    public ResponseEntity<Object> getRequestOfReceiver(
+            HttpServletRequest request,
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit) {
+        Account account = (Account) request.getAttribute("account");
+        if (account == null) {
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage("Account not found in getRequestOfReceiver").build(), HttpStatus.OK);
+        }
+        Page<ExchangeRequest> exchangeRequests = requestService.getRequestOfReceiver(account.getId(), page, limit);
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setPagination(new RESTPagination(page, limit, exchangeRequests.getTotalPages(), exchangeRequests.getTotalElements()))
+                .addData(exchangeRequests.stream().map(x -> new RequestDTO(x)).collect(Collectors.toList()))
+                .setStatus(HttpStatus.OK.value())
+                .setMessage(" ").build(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = URL_PATH + "/owner", method = RequestMethod.GET)
+    public ResponseEntity<Object> getRequestOfOwner(
+            HttpServletRequest request,
+            @RequestParam(defaultValue = "1", required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int limit) {
+        Account account = (Account) request.getAttribute("account");
+        if (account == null) {
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage("Account not found in getRequestOfReceiver").build(), HttpStatus.OK);
+        }
+        Page<ExchangeRequest> exchangeRequests = requestService.getRequestOfOwner(account.getId(), page, limit);
+        return new ResponseEntity<>(new RESTResponse.Success()
+                .setPagination(new RESTPagination(page, limit, exchangeRequests.getTotalPages(), exchangeRequests.getTotalElements()))
+                .addData(exchangeRequests.stream().map(x -> new RequestDTO(x)).collect(Collectors.toList()))
+                .setStatus(HttpStatus.OK.value())
+                .setMessage(" ").build(), HttpStatus.OK);
     }
 }

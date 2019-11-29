@@ -22,6 +22,8 @@ public class GiftDTO {
     private String updatedAt;
     private String deletedAt;
     private String email;
+    private String status;
+    private int numberOfStatus;
     private String[] thumbnail;
 
     public GiftDTO(Gift gift) {
@@ -41,6 +43,26 @@ public class GiftDTO {
         String thumbnails = gift.getThumbnail();
         String[] parts = thumbnails.split(",");
         this.thumbnail = parts;
+        switch (gift.getStatus()) {
+            case -1:
+                this.status = "Đã xóa";
+                break;
+            case 0:
+                this.status = "Chờ duyệt";
+                break;
+            case 1:
+                this.status = "Đã duyệt";
+                break;
+            case 2:
+                this.status = "Đang giao dịch";
+                break;
+            case 3:
+                this.status = "Đã giao dịch";
+                break;
+            default:
+                break;
+        }
+        this.numberOfStatus = gift.getStatus();
         this.createdAt = DateTimeUtil.formatDateFromLong(gift.getCreatedAt());
         this.updatedAt = DateTimeUtil.formatDateFromLong(gift.getUpdatedAt());
         this.deletedAt = DateTimeUtil.formatDateFromLong(gift.getDeletedAt());
@@ -158,6 +180,14 @@ public class GiftDTO {
         this.deletedAt = deletedAt;
     }
 
+    public int getNumberOfStatus() {
+        return numberOfStatus;
+    }
+
+    public void setNumberOfStatus(int numberOfStatus) {
+        this.numberOfStatus = numberOfStatus;
+    }
+
     public long getAccountId() {
         return accountId;
     }
@@ -172,6 +202,14 @@ public class GiftDTO {
 
     public void setThumbnail(String[] thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public static void main(String[] args) {

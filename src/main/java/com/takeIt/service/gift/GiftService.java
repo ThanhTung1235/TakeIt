@@ -16,5 +16,7 @@ public interface GiftService {
 
     Gift getProduct(long id);
 
+    Gift getGift(long id);
+
     boolean delete(long id);
 }

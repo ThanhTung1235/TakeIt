@@ -58,11 +58,11 @@ public class ExchangeRequestEndpoint {
                 }
                 exchangeRequest.setId(Calendar.getInstance().getTimeInMillis());
                 Long gaid = exchangeRequest.getGift().getAccount().getId();
-//                requestService.sendSimpleMessage(accountInfo.getEmail(),
-//                        a.getUsername(),
-//                        exchangeRequest.getId(), exchangeRequest.getMessage(),
-//                        exchangeRequest.getGift().getThumbnail(),
-//                        gaid.toString());
+                requestService.sendSimpleMessage(accountInfo.getEmail(),
+                        a.getUsername(),
+                        exchangeRequest.getId(), exchangeRequest.getMessage(),
+                        exchangeRequest.getGift().getThumbnail(),
+                        gaid.toString());
 
                 exchangeRequest.setOwnerId(gaid);
                 exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);

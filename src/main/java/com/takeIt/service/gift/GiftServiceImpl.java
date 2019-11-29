@@ -68,6 +68,11 @@ public class GiftServiceImpl implements GiftService {
     }
 
     @Override
+    public Gift getGift(long id) {
+        return giftRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public boolean delete(long id) {
         Optional<Gift> p = giftRepository.findById(id);
         if (p.isPresent()) {

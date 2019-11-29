@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/_api/admin/products")
+@RequestMapping(value = "/_api/admin/gifts")
 public class GiftAdminEndpoint {
     @Autowired
     GiftService giftService;
 
-    @RequestMapping(value = "", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<Object> search(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "city", required = false) String cityName,
@@ -87,11 +87,25 @@ public class GiftAdminEndpoint {
                     .addData(giftService.update(id, gift)), HttpStatus.OK);
     }
 
+    @RequestMapping(method = RequestMethod.GET, value = "/detail/{id}")
+    public ResponseEntity<Object> getGift(@PathVariable long id) {
+        Gift p = giftService.getGift(id);
+        if (p == null)
+            return new ResponseEntity<>(new RESTResponse.SimpleError()
+                    .setCode(HttpStatus.NOT_FOUND.value())
+                    .setMessage("Product not found").build(), HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity<>(new RESTResponse.Success()
+                    .setStatus(HttpStatus.OK.value())
+                    .setMessage("")
+                    .addData(new GiftDTO(p)).build(), HttpStatus.OK);
+    }
+
     //Xóa Gift
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
-    public ResponseEntity<Object> delete(@PathVariable long id){
+    public ResponseEntity<Object> delete(@PathVariable long id) {
         if (giftService.delete(id))
-            return new ResponseEntity<>( new RESTResponse.Success()
+            return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.OK.value())
                     .setMessage("Deleted!")
                     .build(),
@@ -114,7 +128,7 @@ public class GiftAdminEndpoint {
             return new ResponseEntity<>(new RESTResponse.Success()
                     .setStatus(HttpStatus.OK.value())
                     .setMessage(" ").build(), HttpStatus.OK);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new RESTResponse.SimpleError()
                     .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())

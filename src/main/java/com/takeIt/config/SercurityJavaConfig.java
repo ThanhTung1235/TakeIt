@@ -35,7 +35,7 @@ public class SercurityJavaConfig extends WebSecurityConfigurerAdapter {
         http.antMatcher(PROTECTED_URLS)
                 .addFilterBefore(authenticationFilter(), AnonymousAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/_api/**").hasRole("MEMBER")
+                .antMatchers("/_api/**").hasAnyRole("MEMBER","ADMIN")
                 .antMatchers("/_api/admin/**").hasRole("ADMIN");
 
     }

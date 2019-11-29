@@ -196,7 +196,7 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
 
         transactionRepository.save(transaction);
 //        gui lai mail cho receiver
-//        sendMailForReceiver(exchangeRequest);
+        sendMailForReceiver(exchangeRequest);
 
 
     }

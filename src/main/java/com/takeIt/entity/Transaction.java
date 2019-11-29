@@ -10,7 +10,7 @@ public class Transaction {
     private long Id;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Account account;
-    @OneToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     private Gift gift;
     @OneToOne
     private ExchangeRequest exchangeRequest;

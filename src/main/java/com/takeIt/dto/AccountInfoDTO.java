@@ -10,6 +10,8 @@ public class AccountInfoDTO {
     private String lastName;
     private String email;
     private long dob;
+    private String phone;
+    private String socialUrl;
     private long createdAt;
     private long updatedAt;
 
@@ -17,10 +19,12 @@ public class AccountInfoDTO {
 
     }
 
-    public AccountInfoDTO(AccountInfo accountInfo){
+    public AccountInfoDTO(AccountInfo accountInfo) {
         this.id = valueOf(accountInfo.getId());
         this.firstName = accountInfo.getFirstName();
         this.lastName = accountInfo.getLastName();
+        this.phone = accountInfo.getPhone();
+        this.socialUrl = accountInfo.getSocialUrl();
         this.email = accountInfo.getEmail();
         this.dob = valueOf(accountInfo.getDob());
         this.createdAt = valueOf(accountInfo.getCreatedAt());
@@ -81,5 +85,21 @@ public class AccountInfoDTO {
 
     public void setUpdatedAt(long updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSocialUrl() {
+        return socialUrl;
+    }
+
+    public void setSocialUrl(String socialUrl) {
+        this.socialUrl = socialUrl;
     }
 }

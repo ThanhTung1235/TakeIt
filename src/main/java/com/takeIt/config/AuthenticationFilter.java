@@ -36,7 +36,9 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
         }
         token = token.replaceAll("Bearer", "").trim();
         httpServletRequest.setAttribute("apikey", token);
+        System.out.println(token);
         Account account = credentialsService.finByToken(token);
+        logger.info("User is login with token: "+ account.getUsername());
         httpServletRequest.setAttribute("account", account);
         Authentication requestAuthentication = new UsernamePasswordAuthenticationToken(token, token);
         return getAuthenticationManager().authenticate(requestAuthentication);

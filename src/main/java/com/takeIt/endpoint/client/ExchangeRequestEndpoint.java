@@ -58,11 +58,11 @@ public class ExchangeRequestEndpoint {
                 }
                 exchangeRequest.setId(Calendar.getInstance().getTimeInMillis());
                 Long gaid = exchangeRequest.getGift().getAccount().getId();
-                requestService.sendSimpleMessage(accountInfo.getEmail(),
-                        a.getUsername(),
-                        exchangeRequest.getId(), exchangeRequest.getMessage(),
-                        exchangeRequest.getGift().getThumbnail(),
-                        gaid.toString());
+//                requestService.sendSimpleMessage(accountInfo.getEmail(),
+//                        a.getUsername(),
+//                        exchangeRequest.getId(), exchangeRequest.getMessage(),
+//                        exchangeRequest.getGift().getThumbnail(),
+//                        gaid.toString());
 
                 exchangeRequest.setOwnerId(gaid);
                 exchangeRequest.setStatus(ExchangeRequest.Status.PENDING);
@@ -83,7 +83,7 @@ public class ExchangeRequestEndpoint {
         }
     }
 
-    @RequestMapping(value = URL_PATH + "/gift/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/_api/exchanges/gift/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getRequestOfGift(
             HttpServletRequest request,
             @PathVariable long id,
@@ -111,8 +111,7 @@ public class ExchangeRequestEndpoint {
     }
 
 
-
-    @RequestMapping(value = URL_PATH + "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/_api/exchanges/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> updateStatusRequest(
             HttpServletRequest request,
             @PathVariable long id,
@@ -163,7 +162,7 @@ public class ExchangeRequestEndpoint {
     }
 
 
-    @RequestMapping(value = URL_PATH + "/receiver", method = RequestMethod.GET)
+    @RequestMapping(value = "/_api/exchanges/receiver", method = RequestMethod.GET)
     public ResponseEntity<Object> getRequestOfReceiver(
             HttpServletRequest request,
             @RequestParam(defaultValue = "1", required = false) int page,
@@ -182,12 +181,14 @@ public class ExchangeRequestEndpoint {
                 .setMessage(" ").build(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = URL_PATH + "/owner", method = RequestMethod.GET)
+    @RequestMapping(value = "/_api/exchanges/owner", method = RequestMethod.GET)
     public ResponseEntity<Object> getRequestOfOwner(
             HttpServletRequest request,
             @RequestParam(defaultValue = "1", required = false) int page,
             @RequestParam(defaultValue = "10", required = false) int limit) {
+        System.out.println("is receiver");
         Account account = (Account) request.getAttribute("account");
+        System.out.println("is owner");
         if (account == null) {
             return new ResponseEntity<>(new RESTResponse.SimpleError()
                     .setCode(HttpStatus.NOT_FOUND.value())

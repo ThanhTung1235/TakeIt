@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
-import javax.swing.text.html.Option;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ExchangeRequestServiceImpl implements ExchangeRequestService {
@@ -40,10 +42,12 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     public Page<ExchangeRequest> getRequestOfReceiver(long receiverId, int page, int limit) {
         return exchangeRequestRepository.findByAccount_Id(receiverId, PageRequest.of(page - 1, limit));
     }
+
     @Override
     public Page<ExchangeRequest> getRequestOfOwner(long owner, int page, int limit) {
         return exchangeRequestRepository.findByOwnerId(owner, PageRequest.of(page - 1, limit));
     }
+
     @Override
     public Page<ExchangeRequest> getRequestOfGift(long giftId, long accountId, int page, int limit) {
         Optional<Gift> optional = giftRepository.findById(giftId);
@@ -60,22 +64,23 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
 
     @Override
     public ExchangeRequest updateStatusRequest(long id, boolean status, Account account) {
-
+        System.out.println("save transaction");
         Optional<ExchangeRequest> requestOption = exchangeRequestRepository.findById(id);
         if (requestOption.isPresent()) {
             ExchangeRequest requestExist = requestOption.get();
             long gifId = requestExist.getGift().getId();
-
             Optional<Gift> gift = giftRepository.findById(gifId);
             if (gift.isPresent()) {
+                System.out.println(gift.get().getName());
                 long accountId = gift.get().getAccount().getId();
+                System.out.println("accountId :" + accountId + "accountId of gift: " +account.getId());
                 Gift g = gift.get();
                 if (accountId == account.getId()) {
                     System.out.println("status: " + status);
                     if (status) {
-                        g.setStatus(Gift.Status.EXCHANGE_PENDING);
                         requestExist.setStatus(ExchangeRequest.Status.CONFIRMED);
                         exchangeRequestRepository.save(requestExist);
+                        g.setStatus(Gift.Status.EXCHANGE_PENDING);
                         giftRepository.save(g);
                         createTransaction(requestExist);
                     } else {
@@ -180,21 +185,37 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService {
     }
 
     public void createTransaction(ExchangeRequest exchangeRequest) {
+        Optional<Transaction> optional = transactionRepository.findByExchangeRequest_Id(exchangeRequest.getId());
+
         Transaction transaction = new Transaction();
         transaction.setAccount(exchangeRequest.getAccount());
-        transaction.setGift(exchangeRequest.getGift());
         transaction.setOwnerId(exchangeRequest.getGift().getAccount().getId());
+
         transaction.setStatus(Transaction.Status.IS_EXCHANGING);
         transaction.setExchangeRequest(exchangeRequest);
 
         transactionRepository.save(transaction);
 //        gui lai mail cho receiver
+//        sendMailForReceiver(exchangeRequest);
+
+
+    }
+
+    public void sendMailForReceiver(ExchangeRequest exchangeRequest) {
+        String phone = exchangeRequest.getGift().getAccount().getAccountInfo().getPhone();
+        String email = exchangeRequest.getGift().getAccount().getAccountInfo().getEmail();
+        String socialUrl = exchangeRequest.getGift().getAccount().getAccountInfo().getSocialUrl();
+
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setSubject("Simple Take message");
         mailMessage.setText("Tuyệt " + exchangeRequest.getGift().getAccount().getUsername()
                 + " đã đồng ý bạn nhận món đồ "
                 + exchangeRequest.getGift().getName()
-                + ". Bây giờ chỉ cần thỏa thuận thời gian và cách nhận đồ nữa thôi.");
+                + ". Bây giờ chỉ cần thỏa thuận thời gian và cách nhận đồ nữa thôi.                     "
+                + "                     - Số điện thoại của người cho: " + phone
+                + "                     - Địa chỉ email của người cho: " + email
+                + "                     - Địa chỉ facebook cá nhân của người cho: " + socialUrl);
+
         mailMessage.setTo(exchangeRequest.getAccount().getAccountInfo().getEmail());
         emailSender.send(mailMessage);
     }

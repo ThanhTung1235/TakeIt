@@ -12,6 +12,8 @@ public class TransactionDTO {
     private String giftName;
     private long requestId;
     private String status;
+    private String thumbnail;
+    private int numberOfStatus;
     private String createdAt;
     private String updatedAt;
     private String expirationAt;
@@ -20,10 +22,13 @@ public class TransactionDTO {
         this.id = transaction.getId();
         this.receiverName = transaction.getAccount().getUsername();
         this.accountId = transaction.getAccount().getId();
-        this.giftId = transaction.getGift().getId();
-        this.giftName = transaction.getGift().getName();
-        this.ownerName = transaction.getGift().getAccount().getUsername();
+        this.giftId = transaction.getExchangeRequest().getGift().getId();
+        this.giftName = transaction.getExchangeRequest().getGift().getName();
+        this.ownerName = transaction.getExchangeRequest().getGift().getAccount().getUsername();
         this.requestId = transaction.getExchangeRequest().getId();
+        String thumbnails = transaction.getExchangeRequest().getGift().getThumbnail();
+        String[] parts = thumbnails.split(",");
+        this.thumbnail = parts[0];
         switch (transaction.getStatus()) {
             case -1:
                 this.status = "Hủy giao dịch";
@@ -37,6 +42,7 @@ public class TransactionDTO {
             default:
                 break;
         }
+        this.numberOfStatus = transaction.getStatus();
         this.createdAt = DateTimeUtil.formatDateFromLong(transaction.getCreatedAt());
         this.updatedAt = DateTimeUtil.formatDateFromLong(transaction.getUpdatedAt());
         this.expirationAt = DateTimeUtil.formatDateFromLong(transaction.getExpirationAt());
@@ -128,5 +134,21 @@ public class TransactionDTO {
 
     public void setOwnerName(String ownerName) {
         this.ownerName = ownerName;
+    }
+
+    public int getNumberOfStatus() {
+        return numberOfStatus;
+    }
+
+    public void setNumberOfStatus(int numberOfStatus) {
+        this.numberOfStatus = numberOfStatus;
+    }
+
+    public String getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(String thumbnail) {
+        this.thumbnail = thumbnail;
     }
 }

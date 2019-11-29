@@ -13,6 +13,8 @@ public class AccountInfo {
     @Column(unique = true)
     private String email;
     private long dob;
+    private String phone;
+    private String socialUrl;
     @OneToOne(cascade = CascadeType.ALL)
     private Account account;
     private String avatar;
@@ -94,5 +96,21 @@ public class AccountInfo {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getSocialUrl() {
+        return socialUrl;
+    }
+
+    public void setSocialUrl(String socialUrl) {
+        this.socialUrl = socialUrl;
     }
 }

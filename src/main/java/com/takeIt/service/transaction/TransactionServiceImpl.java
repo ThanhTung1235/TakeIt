@@ -128,25 +128,34 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction updateStatusTransaction(long id, boolean status) {
+    public Transaction updateStatusTransaction(long id, long accountId, boolean status) {
         Optional<Transaction> optional = transactionRepository.findById(id);
         if (optional.isPresent()) {
             Transaction transaction = optional.get();
-            Optional<Gift> optionalGift = giftRepository.findById(transaction.getGift().getId());
-            Gift gift = optionalGift.get();
-            transaction.getGift().getId();
-            if (status) {
-                transaction.setStatus(Transaction.Status.DONE);
-                gift.setStatus(Gift.Status.EXCHANGE_DONE);
-                transactionRepository.save(transaction);
-                giftRepository.save(gift);
+            if (transaction.getOwnerId() == accountId) {
+                Optional<Gift> optionalGift = giftRepository.findById(transaction.getExchangeRequest().getGift().getId());
+                Gift gift = optionalGift.get();
+                if (status) {
+                    transaction.setStatus(Transaction.Status.DONE);
+                    gift.setStatus(Gift.Status.EXCHANGE_DONE);
+                    transactionRepository.save(transaction);
+                    giftRepository.save(gift);
+                } else {
+                    gift.setStatus(Gift.Status.ACTIVE);
+                    transaction.setStatus(Transaction.Status.CANCEL_EXCHANGING);
+                    transactionRepository.save(transaction);
+                    giftRepository.save(gift);
+                }
             } else {
-                transaction.setStatus(Transaction.Status.CANCEL_EXCHANGING);
-                gift.setStatus(Gift.Status.ACTIVE);
-                transactionRepository.save(transaction);
-                giftRepository.save(gift);
+                System.out.println("ko the xac nhan trao doi");
+                return null;
             }
+            return transaction;
+        } else{
+            System.out.println("ko the xac nhan trao doi 2");
+            return null;
         }
-        return null;
+
     }
+
 }

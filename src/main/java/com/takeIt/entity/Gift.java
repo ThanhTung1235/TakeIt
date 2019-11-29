@@ -20,8 +20,8 @@ public class Gift {
     private Account account;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Category category;
-    @OneToOne(mappedBy = "gift", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    private Transaction transaction;
+    @OneToMany(mappedBy = "gift", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    private Set<Transaction> transaction;
     @OneToMany(mappedBy = "gift", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     private Set<ExchangeRequest> exchangeRequest;
     private String street_name;
@@ -145,7 +145,7 @@ public class Gift {
         return category;
     }
 
-    public Transaction getTransaction() {
+    public Set<Transaction> getTransaction() {
         return transaction;
     }
 
@@ -205,7 +205,7 @@ public class Gift {
         this.category = category;
     }
 
-    public void setTransaction(Transaction transaction) {
+    public void setTransaction(Set<Transaction> transaction) {
         this.transaction = transaction;
     }
 

@@ -1,6 +1,5 @@
 package com.takeIt.endpoint.client;
 
-import com.takeIt.dto.RequestDTO;
 import com.takeIt.dto.TransactionDTO;
 import com.takeIt.entity.Account;
 import com.takeIt.entity.AccountInfo;
@@ -10,10 +9,8 @@ import com.takeIt.rest.RESTPagination;
 import com.takeIt.rest.RESTResponse;
 import com.takeIt.service.account.AccountService;
 import com.takeIt.service.accountInfo.AccountInfoService;
-import com.takeIt.service.exchangeRequest.ExchangeRequestService;
 import com.takeIt.service.gift.GiftService;
 import com.takeIt.service.transaction.TransactionService;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -25,7 +22,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 @RestController
@@ -109,7 +105,7 @@ public class TransactionEndpoint {
                 Date exDate = simpleDateFormat.parse(simpleDateFormat.format(transaction.getExpirationAt()));
                 if (transaction.getStatus() == 0) {
                     if (currentDate.compareTo(exDate) == 0) {
-                        Gift gift = giftService.getProduct(transaction.getGift().getId());
+                        Gift gift = giftService.getProduct(transaction.getExchangeRequest().getGift().getId());
                         long accountId = gift.getAccount().getId();
                         AccountInfo accountInfo = accountInfoService.getAccountInfoByAccountId(accountId);
                         Account account = accountService.getAccount(transaction.getAccount().getId());
@@ -133,13 +129,22 @@ public class TransactionEndpoint {
     //http://localhost:8080/_api/transactions/exchangeConfirm/13?status=true   ||confirm exchange done
     @RequestMapping(value = "/exchangeConfirm/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> changeStatusTransaction(
+            HttpServletRequest request,
             @PathVariable long id,
             @RequestParam(value = "status", required = false) boolean status) {
         try {
-            transactionService.updateStatusTransaction(id, status);
-            return new ResponseEntity<>(new RESTResponse.Success()
-                    .setStatus(HttpStatus.OK.value())
-                    .setMessage(" ").build(), HttpStatus.OK);
+            Account account = (Account) request.getAttribute("account");
+            Transaction transaction = transactionService.updateStatusTransaction(id, account.getId(), status);
+            if (transaction != null) {
+                return new ResponseEntity<>(new RESTResponse.Success()
+                        .setStatus(HttpStatus.OK.value())
+                        .setMessage("Món đồ đã được đến lấy").build(), HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(new RESTResponse.SimpleError()
+                        .setCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .setMessage("Lỗi hệ thống").build(), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(new RESTResponse.SimpleError()

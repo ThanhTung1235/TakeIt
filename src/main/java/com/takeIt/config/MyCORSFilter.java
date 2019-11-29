@@ -25,7 +25,6 @@ public class MyCORSFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST, DELETE, Authorization");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me,Authorization");
-        System.out.println(request.getMethod());
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
